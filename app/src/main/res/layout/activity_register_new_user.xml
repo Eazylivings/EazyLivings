@@ -57,5 +57,15 @@
             android:layout_below="@+id/newUser_text_password"
             android:layout_centerHorizontal="true"
             android:hint="@string/confirm_password" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/register"
+            android:id="@+id/newUser_button_register"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="56dp"
+            android:onClick="registerNewUser" />
     </RelativeLayout>
 </RelativeLayout>
