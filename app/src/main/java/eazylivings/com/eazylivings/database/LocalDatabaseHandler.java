@@ -18,18 +18,11 @@ public class LocalDatabaseHandler extends SQLiteOpenHelper{
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-Log.i("12","onCreate");
-        db.execSQL(Constants.CREATE_TABLE_QUERY);
-
-
 
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-
-        db.execSQL(Constants.DROP_TABLE_QUERY+ Constants.SIGNUP_DETAILS_TABLE);
-        onCreate(db);
 
     }
 

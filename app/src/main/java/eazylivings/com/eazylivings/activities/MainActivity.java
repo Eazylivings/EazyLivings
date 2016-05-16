@@ -1,14 +1,11 @@
-package eazylivings.com.eazylivings;
+package eazylivings.com.eazylivings.activities;
 
 import android.content.Intent;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
-import android.view.View;
-import android.widget.EditText;
-import android.widget.ImageButton;
-import android.widget.TextView;
+
+import eazylivings.com.eazylivings.R;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -23,6 +20,6 @@ public class MainActivity extends AppCompatActivity {
                 MainActivity.this.startActivity(mainIntent);
                 MainActivity.this.finish();
             }
-        }, 3500);
+        }, 2500);
     }
 }

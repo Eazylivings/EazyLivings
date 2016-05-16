@@ -1,28 +1,41 @@
-package eazylivings.com.eazylivings;
+package eazylivings.com.eazylivings.activities;
 
 import android.content.Intent;
-import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 
+import eazylivings.com.eazylivings.R;
+
 public class LoginPage extends AppCompatActivity {
 
+    private String userName;
+    private String password;
 
-    String tag="12";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login_page);
-
     }
 
     public void onClickLoginButton(View view) {
-        EditText userName = (EditText) findViewById(R.id.loginPage_editText_userName);
-        EditText password = (EditText) findViewById(R.id.loginPage_editText_password);
+        EditText editText_userName = (EditText) findViewById(R.id.loginPage_editText_userName);
+        EditText editText_password = (EditText) findViewById(R.id.loginPage_editText_password);
 
+        if(userName!=null && password!=null){
+
+            userName=editText_userName.getText().toString();
+            password=editText_password.getText().toString();
+
+            if(userName.equalsIgnoreCase("shwetang") && password.equalsIgnoreCase("password")){
+
+            }else
+            {
+
+            }
+        }
 
     }
 
