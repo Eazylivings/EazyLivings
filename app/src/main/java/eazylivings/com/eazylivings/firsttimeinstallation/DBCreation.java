@@ -10,6 +10,13 @@ import eazylivings.com.eazylivings.constants.Constants;
 public class DBCreation  extends SQLiteOpenHelper {
 
 
+    public static final String USER_DETAILS_TABLE_CREATION_QUERY="CREATE TABLE user_details(_id  INTEGER PRIMARY KEY AUTOINCREMENT,"+
+            "user_name TEXT, first_name TEXT, last_name TEXT, email_address TEXT, contact_number TEXT, residential_address TEXT )";
+
+    public static final String USER_PREFERENCES_TABLE_QUERY="CREATE TABLE user_preferences(_id INTEGER PRIMARY KEY AUTOINCREMENT,"+
+            "service_name TEXT, is_subscribed BOOLEAN)";
+
+
     public DBCreation(Context context, String dataBaseName, SQLiteDatabase.CursorFactory factory, int dataBaseVersion) {
         super(context,dataBaseName, factory,dataBaseVersion);
     }
@@ -17,8 +24,8 @@ public class DBCreation  extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
 
-        db.execSQL(Constants.USER_DETAILS_TABLE_CREATION_QUERY);
-        db.execSQL(Constants.USER_PREFERENCES_TABLE_QUERY);
+        db.execSQL(USER_DETAILS_TABLE_CREATION_QUERY);
+        db.execSQL(USER_PREFERENCES_TABLE_QUERY);
     }
 
     @Override

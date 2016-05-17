@@ -20,11 +20,7 @@ public class Constants {
     public final static String DROP_TABLE_QUERY="DROP TABLE IF EXISTS ";
 
 
-    public static final String USER_DETAILS_TABLE_CREATION_QUERY="CREATE TABLE user_details(_id  INTEGER PRIMARY KEY AUTOINCREMENT,"+
-            "user_name TEXT, first_name TEXT, last_name TEXT, email_address TEXT, contact_number TEXT, residential_address TEXT )";
 
-    public static final String USER_PREFERENCES_TABLE_QUERY="CREATE TABLE user_preferences(_id INTEGER PRIMARY KEY AUTOINCREMENT,"+
-            "user_id_fk INTEGER)";
 
 
 
