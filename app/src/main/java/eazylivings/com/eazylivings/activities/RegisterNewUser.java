@@ -9,6 +9,9 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 import eazylivings.com.eazylivings.R;
 import eazylivings.com.eazylivings.constants.Constants;
 import eazylivings.com.eazylivings.database.LocalDatabaseHandler;
@@ -17,15 +20,7 @@ import eazylivings.com.eazylivings.firsttimeinstallation.DBCreation;
 
 public class RegisterNewUser extends AppCompatActivity {
 
-
-    LocalDatabaseHandler localDatabaseHandler;
     DBCreation dbCreation;
-    private String userName=((EditText)findViewById(R.id.newUser_text_userName)).getText().toString();
-    private String emailAddress=((EditText)findViewById(R.id.newUser_text_email)).getText().toString();
-    private String password=((EditText)findViewById(R.id.newUser_text_password)).getText().toString();
-    private String confirmPassword=((EditText)findViewById(R.id.newUser_text_confirmPassword)).getText().toString();
-
-    private boolean isInformationValidated=false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,50 +30,75 @@ public class RegisterNewUser extends AppCompatActivity {
 
     public void registerNewUser(View view){
 
+        EditText userName=(EditText)findViewById(R.id.newUser_text_userName);
+        EditText emailAddress=(EditText)findViewById(R.id.newUser_text_email);
+        EditText password=(EditText)findViewById(R.id.newUser_text_password);
+        EditText confirmPassword=(EditText)findViewById(R.id.newUser_text_confirmPassword);
 
-        boolean checkEmail=validateEmailAddress(emailAddress);
-        boolean checkPassword=checkPassWordAndConfirmPassword(password,confirmPassword);
+        boolean isEmailCorrect=validateEmailAddress(emailAddress);
+        boolean isPasswordCorrect=checkPassWordAndConfirmPassword(password,confirmPassword);
+        boolean isUserNameCorrect=checkUsername(userName);
 
-        if(isInformationValidated){
+        if(isUserNameCorrect && isEmailCorrect && isPasswordCorrect){
+
             dbCreation=new DBCreation(this,Constants.DATABASE_NAME,null,Constants.DATABASE_VERSION);
             ContentValues values=new ContentValues();
-            values.put(Constants.COLUMN_USERNAME,userName);
-            values.put(Constants.COLUMN_EMAIL_ADDRESS,emailAddress);
-            values.put(Constants.COLUMN_PASSWORD,password);
+            values.put(Constants.COLUMN_USERNAME,userName.getText().toString());
+            values.put(Constants.COLUMN_EMAIL_ADDRESS,emailAddress.getText().toString());
+            values.put(Constants.COLUMN_PASSWORD,password.getText().toString());
 
-            dbCreation.insertNewRecordIntoTable(Constants.USER_DETAILS_TABLE_CREATION_QUERY,values);
+            dbCreation.insertServicesIntoTable();
+            dbCreation.insertUserDetails(values);
+
 
         }else{
 
+            if(!isUserNameCorrect){
 
+            }else if(!isEmailCorrect){
 
-        }
+            }else{
 
-
-
-
-
-    }
-    public boolean checkPassWordAndConfirmPassword(String password,String confirmPassword)
-    {
-        boolean passwordStatus = false;
-        if (confirmPassword != null && password != null)
-        {
-            if (password.equals(confirmPassword))
-            {
-                passwordStatus = true;
             }
         }
-        return passwordStatus;
+    }
+    public boolean checkPassWordAndConfirmPassword(EditText password,EditText confirmPassword)
+    {
+
+        if (confirmPassword != null && password != null)
+        {
+            if (password.equals(confirmPassword) && password.getText().toString().matches("^(?=.*[A-Za-z])(?=.*\\d)(?=.*[$@$!%*#?&])[A-Za-z\\d$@$!%*#?&]{8,}$"))
+            {
+                return true;
+            }else{
+                return false;
+            }
+        }else{
+            return false;
+        }
     }
 
-    private boolean validateEmailAddress(String emailAddress){
+    private boolean validateEmailAddress(EditText emailAddress){
 
-        return android.util.Patterns.EMAIL_ADDRESS.matcher(emailAddress).matches();
+        if(emailAddress!=null) {
+
+            return android.util.Patterns.EMAIL_ADDRESS.matcher(emailAddress.getText().toString()).matches();
+        }else {
+            return false;
+        }
     }
 
-    public static String getNextSalt() {
-        return null;
-    }
+    private boolean checkUsername(EditText userName){
 
+        if(userName!=null ){
+
+            if(userName.getText().toString().matches("^[a-z0-9_-]{3,15}$")){
+                return true;
+            }else{
+                return false;
+            }
+        }else{
+            return false;
+        }
+    }
 }

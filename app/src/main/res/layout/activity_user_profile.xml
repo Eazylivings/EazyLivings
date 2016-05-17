@@ -8,6 +8,92 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     android:paddingBottom="@dimen/activity_vertical_margin"
-    tools:context=".activities.UserProfile">
+    tools:context=".activities.UserProfile"
+    android:background="@drawable/abc_list_longpressed_holo">
+
+    <ImageView
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:id="@+id/userProfile_imageView_userImage"
+        android:src="@drawable/profilepic"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="@string/user_name"
+        android:id="@+id/userProfile_userName"
+        android:layout_below="@+id/userProfile_imageView_userImage"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="41dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Large Text"
+        android:id="@+id/userProfile_text_userName"
+        android:layout_alignBottom="@+id/userProfile_userName"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginRight="47dp"
+        android:layout_marginEnd="47dp"
+        android:editable="false" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="@string/contact_number"
+        android:id="@+id/userProfile_contactNumber"
+        android:layout_below="@+id/userProfile_userName"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="34dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Large Text"
+        android:id="@+id/userProfile_text_contactNumber"
+        android:layout_alignBottom="@+id/userProfile_contactNumber"
+        android:layout_alignLeft="@+id/userProfile_text_userName"
+        android:layout_alignStart="@+id/userProfile_text_userName"
+        android:editable="false" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="@string/address"
+        android:id="@+id/userProfile_address"
+        android:layout_below="@+id/userProfile_contactNumber"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="35dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Large Text"
+        android:id="@+id/userProfile_text_address"
+        android:layout_alignBottom="@+id/userProfile_address"
+        android:layout_alignLeft="@+id/userProfile_text_contactNumber"
+        android:layout_alignStart="@+id/userProfile_text_contactNumber" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Update Profile"
+        android:id="@+id/userProfile_button_updateProfile"
+        android:layout_alignParentBottom="true"
+        android:layout_alignLeft="@+id/userProfile_imageView_userImage"
+        android:layout_alignStart="@+id/userProfile_imageView_userImage"
+        android:onClick="updateUserProfile" />
 
 </RelativeLayout>

@@ -7,4 +7,7 @@
     <string name="username">UserName</string>
     <string name="back_to_login">Back to Login</string>
     <string name="register">Register</string>
+    <string name="user_name">User Name</string>
+    <string name="contact_number">Contact Number</string>
+    <string name="address">Address</string>
 </resources>
