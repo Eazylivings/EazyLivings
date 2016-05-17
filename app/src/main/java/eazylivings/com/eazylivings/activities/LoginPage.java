@@ -24,12 +24,17 @@ public class LoginPage extends AppCompatActivity {
         EditText editText_userName = (EditText) findViewById(R.id.loginPage_editText_userName);
         EditText editText_password = (EditText) findViewById(R.id.loginPage_editText_password);
 
-        if(userName!=null && password!=null){
+        if(editText_userName!=null && editText_password!=null){
 
             userName=editText_userName.getText().toString();
             password=editText_password.getText().toString();
 
             if(userName.equalsIgnoreCase("shwetang") && password.equalsIgnoreCase("password")){
+
+                Intent intent = new Intent(this, WelcomeScreen.class);
+                intent.putExtra("userName",userName);
+
+                startActivity(intent);
 
             }else
             {
