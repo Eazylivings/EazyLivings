@@ -48,10 +48,7 @@ public class ForgotPassword extends AppCompatActivity {
 
     private boolean sendEmail(EditText emailAddress){
 
-        boolean isEmailSuccessfullySent=false;
-
-        return isEmailSuccessfullySent;
-
+       return false;
     }
 
     private void generatePopupMessages(String message){

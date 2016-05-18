@@ -1,6 +1,11 @@
 package eazylivings.com.eazylivings.validators;
 
+import android.content.Context;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.widget.EditText;
+
+import java.net.InetAddress;
 
 import eazylivings.com.eazylivings.database.ServerDatabaseHandler;
 
@@ -85,5 +90,32 @@ public class ValidateInputs {
             return false;
         }
 
+    }
+
+    public boolean isInternetAvailable() {
+        try {
+            InetAddress ipAddr = InetAddress.getByName("google.com"); //You can replace it with your name
+
+            if (ipAddr.equals("")) {
+                return false;
+            } else {
+                return true;
+            }
+
+        } catch (Exception e) {
+            return false;
+        }
+
+    }
+
+    public boolean isConnectedToWiFi(Context context){
+        ConnectivityManager cm =
+                (ConnectivityManager)context.getSystemService(Context.CONNECTIVITY_SERVICE);
+
+        NetworkInfo activeNetwork = cm.getActiveNetworkInfo();
+        boolean isConnected = activeNetwork != null &&
+                activeNetwork.isConnectedOrConnecting();
+
+        return  activeNetwork.getType() == ConnectivityManager.TYPE_WIFI;
     }
 }
