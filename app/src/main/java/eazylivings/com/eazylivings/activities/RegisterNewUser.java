@@ -10,6 +10,7 @@ import eazylivings.com.eazylivings.R;
 import eazylivings.com.eazylivings.constants.Constants;
 import eazylivings.com.eazylivings.database.ServerDatabaseHandler;
 import eazylivings.com.eazylivings.firsttimeinstallation.DBCreation;
+import eazylivings.com.eazylivings.validators.ValidateInputs;
 
 public class RegisterNewUser extends AppCompatActivity {
 
@@ -28,11 +29,11 @@ public class RegisterNewUser extends AppCompatActivity {
         EditText password=(EditText)findViewById(R.id.newUser_text_password);
         EditText confirmPassword=(EditText)findViewById(R.id.newUser_text_confirmPassword);
 
-        boolean isEmailCorrect=validateEmailAddress(emailAddress);
-        boolean isConfirmPasswordCorrect=checkPassWordAndConfirmPassword(password,confirmPassword);
-        boolean isUserAlreadyPresent=checkExistingUser(userName);
-        boolean isUserNameCorrect=checkUsername(userName);
-        boolean isPasswordCorrect=checkPassword(password);
+        boolean isEmailCorrect=ValidateInputs.validateEmailAddress(emailAddress);
+        boolean isConfirmPasswordCorrect=ValidateInputs.checkPassWordAndConfirmPassword(password,confirmPassword);
+        boolean isUserAlreadyPresent=ValidateInputs.checkExistingUser(userName);
+        boolean isUserNameCorrect=ValidateInputs.checkUsername(userName);
+        boolean isPasswordCorrect=ValidateInputs.checkPassword(password);
 
         if(isUserNameCorrect && isEmailCorrect && isConfirmPasswordCorrect && !isUserAlreadyPresent && isPasswordCorrect){
 
@@ -69,70 +70,7 @@ public class RegisterNewUser extends AppCompatActivity {
             }
         }
     }
-    private boolean checkPassWordAndConfirmPassword(EditText password,EditText confirmPassword)
-    {
 
-        if (confirmPassword != null && password != null)
-        {
-            if (password.equals(confirmPassword))
-            {
-                return true;
-            }else{
-                return false;
-            }
-        }else{
-            return false;
-        }
-    }
-
-    private boolean checkPassword(EditText password){
-
-        if(password!=null){
-            if(password.getText().toString().matches("^(?=.*[A-Za-z])(?=.*\\d)(?=.*[$@$!%*#?&])[A-Za-z\\d$@$!%*#?&]{8,}$")){
-                return true;
-            }else{
-                return false;
-            }
-        }else{
-            return false;
-        }
-    }
-
-
-    private boolean validateEmailAddress(EditText emailAddress){
-
-        if(emailAddress!=null) {
-
-            return android.util.Patterns.EMAIL_ADDRESS.matcher(emailAddress.getText().toString()).matches();
-        }else {
-            return false;
-        }
-    }
-
-    private boolean checkUsername(EditText userName){
-
-        if(userName!=null ){
-
-            if(userName.getText().toString().matches("^[a-z0-9_-]{3,15}$")){
-                return true;
-            }else{
-                return false;
-            }
-        }else{
-            return false;
-        }
-    }
-
-    private boolean checkExistingUser(EditText userName){
-
-        ServerDatabaseHandler serverDatabaseHandler=new ServerDatabaseHandler();
-        if(userName!=null){
-            return serverDatabaseHandler.getExistingUser(userName.getText().toString());
-        }else
-        {
-            return false;
-        }
-    }
 
 
     private void generatePopupMessages(String message){

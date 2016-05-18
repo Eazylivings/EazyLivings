@@ -8,6 +8,7 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import eazylivings.com.eazylivings.R;
+import eazylivings.com.eazylivings.validators.ValidateInputs;
 
 public class ForgotPassword extends AppCompatActivity {
 
@@ -27,16 +28,34 @@ public class ForgotPassword extends AppCompatActivity {
         }
     }
 
-
-   /* private void onClickBackToLogin(View view){
-
-
-
-    }*/
-
     private void onClickRetrievePassword(View view){
 
         EditText emailAddress=(EditText)findViewById(R.id.forgotPassword_button_emailAddress);
+        boolean isEmailPresentInRecords=ValidateInputs.checkExistingEmail(emailAddress);
+
+
+        if(emailAddress!=null && isEmailPresentInRecords){
+            sendEmail(emailAddress);
+        }else{
+            generatePopupMessages("Please check email Address.");
+        }
+
+        boolean isEmailSuccessfullySent=sendEmail(emailAddress);
+
+
 
     }
+
+    private boolean sendEmail(EditText emailAddress){
+
+        boolean isEmailSuccessfullySent=false;
+
+        return isEmailSuccessfullySent;
+
+    }
+
+    private void generatePopupMessages(String message){
+
+    }
+
 }
