@@ -1,21 +1,14 @@
 package eazylivings.com.eazylivings.activities;
 
 import android.content.ContentValues;
-import android.database.sqlite.SQLiteDatabase;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
-
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 import eazylivings.com.eazylivings.R;
 import eazylivings.com.eazylivings.constants.Constants;
-import eazylivings.com.eazylivings.database.LocalDatabaseHandler;
-import eazylivings.com.eazylivings.database.SignUpDetails;
+import eazylivings.com.eazylivings.database.ServerDatabaseHandler;
 import eazylivings.com.eazylivings.firsttimeinstallation.DBCreation;
 
 public class RegisterNewUser extends AppCompatActivity {
@@ -36,10 +29,12 @@ public class RegisterNewUser extends AppCompatActivity {
         EditText confirmPassword=(EditText)findViewById(R.id.newUser_text_confirmPassword);
 
         boolean isEmailCorrect=validateEmailAddress(emailAddress);
-        boolean isPasswordCorrect=checkPassWordAndConfirmPassword(password,confirmPassword);
+        boolean isConfirmPasswordCorrect=checkPassWordAndConfirmPassword(password,confirmPassword);
+        boolean isUserAlreadyPresent=checkExistingUser(userName);
         boolean isUserNameCorrect=checkUsername(userName);
+        boolean isPasswordCorrect=checkPassword(password);
 
-        if(isUserNameCorrect && isEmailCorrect && isPasswordCorrect){
+        if(isUserNameCorrect && isEmailCorrect && isConfirmPasswordCorrect && !isUserAlreadyPresent && isPasswordCorrect){
 
             dbCreation=new DBCreation(this,Constants.DATABASE_NAME,null,Constants.DATABASE_VERSION);
             ContentValues values=new ContentValues();
@@ -53,21 +48,33 @@ public class RegisterNewUser extends AppCompatActivity {
 
         }else{
 
-            if(!isUserNameCorrect){
+            if(!isUserAlreadyPresent){
+
+                generatePopupMessages("This Username is already taken. Please choose different username.");
+
+            }else if(!isUserNameCorrect){
+
+                generatePopupMessages("Please check username. It should contains Une number.");
 
             }else if(!isEmailCorrect){
 
-            }else{
+                generatePopupMessages("Please provide correct email address");
 
+            }else if(!isPasswordCorrect){
+
+                generatePopupMessages("Password should adhere to password policies.");
+
+            }else{
+                generatePopupMessages("Confirm password should be same as password.");
             }
         }
     }
-    public boolean checkPassWordAndConfirmPassword(EditText password,EditText confirmPassword)
+    private boolean checkPassWordAndConfirmPassword(EditText password,EditText confirmPassword)
     {
 
         if (confirmPassword != null && password != null)
         {
-            if (password.equals(confirmPassword) && password.getText().toString().matches("^(?=.*[A-Za-z])(?=.*\\d)(?=.*[$@$!%*#?&])[A-Za-z\\d$@$!%*#?&]{8,}$"))
+            if (password.equals(confirmPassword))
             {
                 return true;
             }else{
@@ -77,6 +84,20 @@ public class RegisterNewUser extends AppCompatActivity {
             return false;
         }
     }
+
+    private boolean checkPassword(EditText password){
+
+        if(password!=null){
+            if(password.getText().toString().matches("^(?=.*[A-Za-z])(?=.*\\d)(?=.*[$@$!%*#?&])[A-Za-z\\d$@$!%*#?&]{8,}$")){
+                return true;
+            }else{
+                return false;
+            }
+        }else{
+            return false;
+        }
+    }
+
 
     private boolean validateEmailAddress(EditText emailAddress){
 
@@ -100,5 +121,21 @@ public class RegisterNewUser extends AppCompatActivity {
         }else{
             return false;
         }
+    }
+
+    private boolean checkExistingUser(EditText userName){
+
+        ServerDatabaseHandler serverDatabaseHandler=new ServerDatabaseHandler();
+        if(userName!=null){
+            return serverDatabaseHandler.getExistingUser(userName.getText().toString());
+        }else
+        {
+            return false;
+        }
+    }
+
+
+    private void generatePopupMessages(String message){
+
     }
 }
