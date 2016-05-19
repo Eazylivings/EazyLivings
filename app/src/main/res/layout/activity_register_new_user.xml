@@ -16,56 +16,77 @@
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="159dp"
-        android:background="#FFFFFF">
+        >
+
 
         <EditText
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="40dp"
             android:inputType="textPersonName"
             android:ems="10"
             android:id="@+id/newUser_text_userName"
             android:layout_alignParentTop="true"
             android:layout_centerHorizontal="true"
-            android:hint="@string/username" />
+            android:hint="@string/username"
+            android:ellipsize="start"
+            android:gravity="center"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/rounded_edittext"
+            android:textColor="#6E6E6E"/>
+
 
         <EditText
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="40dp"
             android:inputType="textEmailAddress"
             android:ems="10"
             android:id="@+id/newUser_text_email"
             android:layout_below="@+id/newUser_text_userName"
             android:layout_centerHorizontal="true"
-            android:hint="@string/email_address" />
+            android:hint="@string/email_address"
+            android:gravity="center"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/rounded_edittext"
+            android:textColor="#6E6E6E"/>
 
         <EditText
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="40dp"
             android:inputType="textPassword"
             android:ems="10"
             android:id="@+id/newUser_text_password"
             android:layout_below="@+id/newUser_text_email"
             android:layout_centerHorizontal="true"
-            android:hint="@string/password" />
+            android:hint="@string/password"
+            android:layout_marginTop="10dp"
+            android:gravity="center"
+            android:background="@drawable/rounded_edittext"
+            android:textColor="#6E6E6E"/>
 
         <EditText
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="40dp"
             android:inputType="textPassword"
             android:ems="10"
             android:id="@+id/newUser_text_confirmPassword"
             android:layout_below="@+id/newUser_text_password"
             android:layout_centerHorizontal="true"
-            android:hint="@string/confirm_password" />
+            android:hint="@string/confirm_password"
+            android:layout_marginTop="10dp"
+            android:gravity="center"
+            android:background="@drawable/rounded_edittext"
+            android:textColor="#6E6E6E"/>
 
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+        <ImageButton
+            android:layout_width="175dp"
+            android:layout_height="65dp"
             android:text="@string/register"
             android:id="@+id/newUser_button_register"
             android:layout_alignParentBottom="true"
             android:layout_centerHorizontal="true"
-            android:layout_marginBottom="56dp"
-            android:onClick="registerNewUser" />
+            android:layout_marginBottom="20dp"
+            android:onClick="registerNewUser"
+            android:layout_marginTop="10dp"
+            android:src="@drawable/regisimage"/>
     </RelativeLayout>
 </RelativeLayout>
