@@ -44,7 +44,7 @@
         android:layout_gravity="left"
         android:id="@+id/loginPage_imageButton_signIn"
         android:onClick="onClickLoginButton"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="30dp"
         android:layout_marginLeft="10dp"
         android:layout_below="@+id/loginPage_editText_password"
         android:src="@drawable/loginimagenew" />
@@ -56,7 +56,7 @@
         android:onClick="onClickRegisterButton"
         android:layout_below="@+id/loginPage_editText_password"
         android:src="@drawable/regisimage"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="30dp"
         android:layout_marginLeft="30dp"
         android:id="@+id/loginPage_imageButton_register"
         android:layout_toRightOf="@+id/loginPage_imageButton_signIn"
