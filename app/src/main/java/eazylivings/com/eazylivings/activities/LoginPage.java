@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.EditText;
 
 import eazylivings.com.eazylivings.R;
+import eazylivings.com.eazylivings.sessionmanagement.Session;
 
 public class LoginPage extends AppCompatActivity {
 
@@ -33,6 +34,8 @@ public class LoginPage extends AppCompatActivity {
 
                 Intent intent = new Intent(this, WelcomeScreen.class);
                 intent.putExtra("userName",userName);
+                Session.setLogUserName(userName,getApplicationContext());
+                Session.setLoginStatus(true,getApplicationContext());
 
                 startActivity(intent);
 

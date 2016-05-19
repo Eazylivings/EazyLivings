@@ -23,7 +23,7 @@
         <activity android:name=".activities.LoginPage" />
         <activity android:name=".activities.UserProfile" />
         <activity android:name=".activities.Introduction" />
-        <activity android:name=".activities.WelcomeScreen"></activity>
+        <activity android:name=".activities.WelcomeScreen" />
     </application>
 
 </manifest>
