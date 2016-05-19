@@ -105,7 +105,6 @@ public class ValidateInputs {
         } catch (Exception e) {
             return false;
         }
-
     }
 
     public boolean isConnectedToWiFi(Context context){
