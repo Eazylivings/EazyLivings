@@ -29,13 +29,13 @@ public class RegisterNewUser extends AppCompatActivity {
         EditText password=(EditText)findViewById(R.id.newUser_text_password);
         EditText confirmPassword=(EditText)findViewById(R.id.newUser_text_confirmPassword);
 
-        boolean isEmailCorrect=ValidateInputs.validateEmailAddress(emailAddress);
+        boolean isEmailFormatCorrect=ValidateInputs.checEmailFormat(emailAddress);
         boolean isConfirmPasswordCorrect=ValidateInputs.checkPassWordAndConfirmPassword(password,confirmPassword);
-        boolean isUserAlreadyPresent=ValidateInputs.checkExistingUser(userName);
-        boolean isUserNameCorrect=ValidateInputs.checkUsername(userName);
-        boolean isPasswordCorrect=ValidateInputs.checkPassword(password);
+        boolean isUserAlreadyPresent=ValidateInputs.checkExistingUser(userName,getApplicationContext());
+        boolean isUserNameFormatCorrect=ValidateInputs.checkUsernameFormat(userName);
+        boolean isPasswordFormatCorrect=ValidateInputs.checkPasswordForamt(password);
 
-        if(isUserNameCorrect && isEmailCorrect && isConfirmPasswordCorrect && !isUserAlreadyPresent && isPasswordCorrect){
+        if(isUserNameFormatCorrect && isEmailFormatCorrect && isConfirmPasswordCorrect && !isUserAlreadyPresent && isPasswordFormatCorrect){
 
             dbCreation=new DBCreation(this,Constants.DATABASE_NAME,null,Constants.DATABASE_VERSION);
             ContentValues values=new ContentValues();
@@ -53,15 +53,15 @@ public class RegisterNewUser extends AppCompatActivity {
 
                 generatePopupMessages("This Username is already taken. Please choose different username.");
 
-            }else if(!isUserNameCorrect){
+            }else if(!isUserNameFormatCorrect){
 
                 generatePopupMessages("Please check username. It should contains Une number.");
 
-            }else if(!isEmailCorrect){
+            }else if(!isEmailFormatCorrect){
 
                 generatePopupMessages("Please provide correct email address");
 
-            }else if(!isPasswordCorrect){
+            }else if(!isPasswordFormatCorrect){
 
                 generatePopupMessages("Password should adhere to password policies.");
 

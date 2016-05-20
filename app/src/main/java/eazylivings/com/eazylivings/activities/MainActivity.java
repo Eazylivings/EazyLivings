@@ -1,5 +1,6 @@
 package eazylivings.com.eazylivings.activities;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Handler;
@@ -9,7 +10,7 @@ import android.os.Bundle;
 import eazylivings.com.eazylivings.R;
 import eazylivings.com.eazylivings.sessionmanagement.Session;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends Activity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
