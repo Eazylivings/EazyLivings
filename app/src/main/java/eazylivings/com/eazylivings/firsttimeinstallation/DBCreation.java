@@ -2,6 +2,7 @@ package eazylivings.com.eazylivings.firsttimeinstallation;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
@@ -12,15 +13,10 @@ import eazylivings.com.eazylivings.constants.Constants;
 public class DBCreation  extends SQLiteOpenHelper {
 
 
-    private static final String USER_DETAILS_TABLE_QUERY="CREATE TABLE user_details(_id  INTEGER PRIMARY KEY AUTOINCREMENT,"+
-            "user_name TEXT, first_name TEXT, last_name TEXT, email_address TEXT, contact_number TEXT, residential_address TEXT )";
-
-    private static final String USER_PREFERENCES_TABLE_QUERY="CREATE TABLE user_preferences(_id INTEGER PRIMARY KEY AUTOINCREMENT,"+
-            "service_name TEXT, is_subscribed BOOLEAN)";
-
-
     private String SERVICE_NAME="service_name";
     private String IS_SUBSCRIBED="is_subscribed";
+    private String IS_USER_LOGGED_IN="is_user_logged_in";
+    private String USER_ID="user_Id";
     ContentValues values;
     SQLiteDatabase db;
 
@@ -34,8 +30,6 @@ public class DBCreation  extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
 
-        db.execSQL(USER_DETAILS_TABLE_QUERY);
-        db.execSQL(USER_PREFERENCES_TABLE_QUERY);
     }
 
     @Override
@@ -63,6 +57,34 @@ public class DBCreation  extends SQLiteOpenHelper {
         }
 
         db.close();
+    }
+
+    public void createUserSpecificTables(String userName){
+
+        db.execSQL("CREATE TABLE user_details_"+userName+"(_id  INTEGER PRIMARY KEY AUTOINCREMENT,user_name TEXT,"+
+                " first_name TEXT, last_name TEXT, email_address TEXT, contact_number TEXT, residential_address TEXT )");
+        db.execSQL("CREATE TABLE user_preferences_"+userName+"(_id INTEGER PRIMARY KEY AUTOINCREMENT,service_name TEXT, is_subscribed BOOLEAN)");
+    }
+
+    public boolean checkIfUserSpecificTableExists(String userName){
+
+        Cursor cursor = db.rawQuery("select DISTINCT tbl_name from sqlite_master where tbl_name = 'user_details_"+userName+"'", null);
+        if(cursor!=null) {
+            if(cursor.getCount()>0) {
+                cursor.close();
+                return true;
+            }else{
+                cursor.close();
+                return false;
+            }
+        }else{
+            cursor.close();
+            return false;
+        }
+    }
+
+    public void populateUerSpecificTables(String userName){
+
     }
 
     //At time of registration, users details like username, email address and password will be stored here. Phone number can also be captured

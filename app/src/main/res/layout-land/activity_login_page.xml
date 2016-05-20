@@ -17,12 +17,13 @@
         android:inputType="textPersonName"
         android:ems="10"
         android:id="@+id/loginPage_editText_userName"
-        android:layout_centerHorizontal="true"
         android:gravity="center"
-        android:layout_marginTop="200dp"
         android:textColor="#FFFFFF"
         android:hint="@string/user_name"
-        />
+        android:layout_marginTop="70dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignLeft="@+id/loginPage_editText_password"
+        android:layout_alignStart="@+id/loginPage_editText_password" />
 
     <EditText
         android:layout_width="235dp"
@@ -39,28 +40,27 @@
         android:textColor="#FFFFFF" />
 
     <ImageButton
-        android:layout_height="50dp"
-        android:layout_width="170dp"
+        android:layout_height="40dp"
+        android:layout_width="150dp"
         android:layout_gravity="left"
         android:id="@+id/loginPage_imageButton_signIn"
         android:onClick="onClickLoginButton"
-        android:layout_alignTop="@+id/loginPage_imageButton_register"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:src="@drawable/loginimagenew" />
+        android:layout_marginTop="30dp"
+        android:src="@drawable/loginimagenew"
+        android:layout_below="@+id/loginPage_editText_password"
+        android:layout_toLeftOf="@+id/loginPage_textView_forgotPassword"
+        android:layout_toStartOf="@+id/loginPage_textView_forgotPassword" />
 
     <ImageButton
-        android:layout_height="50dp"
+        android:layout_height="40dp"
         android:layout_width="150dp"
         android:layout_gravity="left"
         android:onClick="onClickRegisterButton"
-        android:layout_below="@+id/loginPage_editText_password"
         android:src="@drawable/regisimage"
-        android:layout_marginTop="30dp"
-        android:layout_marginLeft="30dp"
         android:id="@+id/loginPage_imageButton_register"
-        android:layout_toRightOf="@+id/loginPage_imageButton_signIn"
-        android:layout_toEndOf="@+id/loginPage_imageButton_signIn" />
+        android:layout_above="@+id/loginPage_textView_forgotPassword"
+        android:layout_toRightOf="@+id/loginPage_textView_forgotPassword"
+        android:layout_toEndOf="@+id/loginPage_textView_forgotPassword" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -69,9 +69,7 @@
         android:text="@string/forgot_password"
         android:id="@+id/loginPage_textView_forgotPassword"
         android:onClick="onClickForgotPassword"
-        android:layout_alignParentBottom="true"
-        android:layout_marginTop="20dp"
-        android:layout_marginBottom="20dp"
+        android:layout_below="@+id/loginPage_imageButton_signIn"
         android:layout_centerHorizontal="true" />
 
 </RelativeLayout>
