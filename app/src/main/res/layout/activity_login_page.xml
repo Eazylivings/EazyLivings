@@ -20,9 +20,9 @@
         android:layout_centerHorizontal="true"
         android:gravity="center"
         android:layout_marginTop="200dp"
-        android:textColor="#6E6E6E"
+        android:textColor="#FFFFFF"
         android:hint="@string/user_name"
-        android:background="@drawable/rounded_edittext"/>
+        />
 
     <EditText
         android:layout_width="235dp"
@@ -35,8 +35,8 @@
         android:gravity="center"
         android:layout_marginTop="10dp"
         android:hint="@string/password"
-        android:background="@drawable/rounded_edittext"
-        />
+
+        android:textColor="#FFFFFF" />
 
     <ImageButton
         android:layout_height="50dp"
