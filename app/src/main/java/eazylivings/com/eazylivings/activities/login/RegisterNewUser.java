@@ -1,4 +1,4 @@
-package eazylivings.com.eazylivings.activities;
+package eazylivings.com.eazylivings.activities.login;
 
 import android.content.ContentValues;
 import android.os.Bundle;
@@ -10,6 +10,7 @@ import eazylivings.com.eazylivings.R;
 import eazylivings.com.eazylivings.constants.Constants;
 import eazylivings.com.eazylivings.database.ServerDatabaseHandler;
 import eazylivings.com.eazylivings.firsttimeinstallation.DBCreation;
+import eazylivings.com.eazylivings.sessionmanagement.Session;
 import eazylivings.com.eazylivings.validators.ValidateInputs;
 
 public class RegisterNewUser extends AppCompatActivity {
@@ -45,6 +46,9 @@ public class RegisterNewUser extends AppCompatActivity {
 
             dbCreation.insertServicesIntoTable();
             dbCreation.insertUserDetails(values);
+            dbCreation.createUserSpecificTables(userName.getText().toString());
+            Session.setLogUserName(userName.getText().toString(),getApplicationContext());
+            Session.setLoginStatus(true,getApplicationContext());
 
 
         }else{
