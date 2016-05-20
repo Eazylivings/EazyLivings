@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    tools:context=".activities.login.LoginPage"
+    android:background="@drawable/login">
+
+
+    <EditText
+        android:layout_width="235dp"
+        android:layout_height="50dp"
+        android:inputType="textPersonName"
+        android:ems="10"
+        android:id="@+id/loginPage_editText_userName"
+        android:gravity="center"
+        android:textColor="#FFFFFF"
+        android:hint="@string/user_name"
+        android:layout_marginTop="70dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignLeft="@+id/loginPage_editText_password"
+        android:layout_alignStart="@+id/loginPage_editText_password" />
+
+    <EditText
+        android:layout_width="235dp"
+        android:layout_height="50dp"
+        android:inputType="textPassword"
+        android:ems="10"
+        android:id="@+id/loginPage_editText_password"
+        android:layout_below="@+id/loginPage_editText_userName"
+        android:layout_centerHorizontal="true"
+        android:gravity="center"
+        android:layout_marginTop="10dp"
+        android:hint="@string/password"
+
+        android:textColor="#FFFFFF" />
+
+    <ImageButton
+        android:layout_height="40dp"
+        android:layout_width="150dp"
+        android:layout_gravity="left"
+        android:id="@+id/loginPage_imageButton_signIn"
+        android:onClick="onClickLoginButton"
+        android:layout_marginTop="30dp"
+        android:src="@drawable/loginimagenew"
+        android:layout_below="@+id/loginPage_editText_password"
+        android:layout_toLeftOf="@+id/loginPage_textView_forgotPassword"
+        android:layout_toStartOf="@+id/loginPage_textView_forgotPassword" />
+
+    <ImageButton
+        android:layout_height="40dp"
+        android:layout_width="150dp"
+        android:layout_gravity="left"
+        android:onClick="onClickRegisterButton"
+        android:src="@drawable/regisimage"
+        android:id="@+id/loginPage_imageButton_register"
+        android:layout_above="@+id/loginPage_textView_forgotPassword"
+        android:layout_toRightOf="@+id/loginPage_textView_forgotPassword"
+        android:layout_toEndOf="@+id/loginPage_textView_forgotPassword" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="@string/forgot_password"
+        android:id="@+id/loginPage_textView_forgotPassword"
+        android:onClick="onClickForgotPassword"
+        android:layout_below="@+id/loginPage_imageButton_signIn"
+        android:layout_centerHorizontal="true" />
+
+</RelativeLayout>
