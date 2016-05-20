@@ -30,7 +30,7 @@ public class ValidateInputs {
         }
     }
 
-    public static boolean checkPasswordForamt(EditText password){
+    public static boolean checkPassword(EditText password){
 
         if(password!=null){
             if(password.getText().toString().matches("^(?=.*[A-Za-z])(?=.*\\d)(?=.*[$@$!%*#?&])[A-Za-z\\d$@$!%*#?&]{8,}$")){
@@ -44,7 +44,7 @@ public class ValidateInputs {
     }
 
 
-    public static boolean checEmailFormat(EditText emailAddress){
+    public static boolean validateEmailAddress(EditText emailAddress){
 
         if(emailAddress!=null) {
 
@@ -54,7 +54,7 @@ public class ValidateInputs {
         }
     }
 
-    public static boolean checkUsernameFormat(EditText userName){
+    public static boolean checkUsername(EditText userName){
 
         if(userName!=null ){
 
@@ -68,9 +68,9 @@ public class ValidateInputs {
         }
     }
 
-    public static boolean checkExistingUser(EditText userName, Context context){
+    public static boolean checkExistingUser(EditText userName){
 
-        ServerDatabaseHandler serverDatabaseHandler=new ServerDatabaseHandler(context);
+        ServerDatabaseHandler serverDatabaseHandler=new ServerDatabaseHandler();
         if(userName!=null){
             return serverDatabaseHandler.getExistingUser(userName.getText().toString());
         }else
@@ -116,14 +116,5 @@ public class ValidateInputs {
                 activeNetwork.isConnectedOrConnecting();
 
         return  activeNetwork.getType() == ConnectivityManager.TYPE_WIFI;
-    }
-
-    public static boolean checkLogInDetails(EditText userName, EditText password,Context context){
-
-        if(userName.getText().toString().equalsIgnoreCase("shwetang") && password.getText().toString().equalsIgnoreCase("password")){
-            return true;
-        }else{
-            return false;
-        }
     }
 }

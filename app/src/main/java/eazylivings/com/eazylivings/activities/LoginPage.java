@@ -8,7 +8,6 @@ import android.widget.EditText;
 
 import eazylivings.com.eazylivings.R;
 import eazylivings.com.eazylivings.sessionmanagement.Session;
-import eazylivings.com.eazylivings.validators.ValidateInputs;
 
 public class LoginPage extends AppCompatActivity {
 
@@ -28,11 +27,11 @@ public class LoginPage extends AppCompatActivity {
 
         if(editText_userName!=null && editText_password!=null){
 
-            boolean isAccountAuthenticated= ValidateInputs.checkLogInDetails(editText_userName,editText_password,getApplicationContext());
-            if(isAccountAuthenticated){
+            userName=editText_userName.getText().toString();
+            password1=editText_password.getText().toString();
 
-                setupUserProfile();
-                userName=editText_userName.getText().toString();
+            if(userName.equalsIgnoreCase("shwetang") && password.equals("password")){
+
                 Intent intent = new Intent(this, WelcomeScreen.class);
                 intent.putExtra("userName",userName);
                 Session.setLogUserName(userName,getApplicationContext());
@@ -59,12 +58,5 @@ public class LoginPage extends AppCompatActivity {
 
         Intent intent = new Intent(this, ForgotPassword.class);
         startActivity(intent);
-    }
-
-    private void setupUserProfile(){
-
-        Session.setLogUserName(userName,getApplicationContext());
-        Session.setLoginStatus(true,getApplicationContext());
-
     }
 }
