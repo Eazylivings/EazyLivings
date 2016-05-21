@@ -1,7 +1,6 @@
 package eazylivings.com.eazylivings.activities.login;
 
 import android.content.Intent;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -9,6 +8,7 @@ import android.widget.EditText;
 
 import eazylivings.com.eazylivings.R;
 import eazylivings.com.eazylivings.activities.WelcomeScreen;
+import eazylivings.com.eazylivings.constants.Constants;
 import eazylivings.com.eazylivings.firsttimeinstallation.DBCreation;
 import eazylivings.com.eazylivings.sessionmanagement.Session;
 import eazylivings.com.eazylivings.validators.ValidateInputs;
@@ -16,8 +16,8 @@ import eazylivings.com.eazylivings.validators.ValidateInputs;
 public class LoginPage extends AppCompatActivity {
 
     private String userName;
+    private String password;
     DBCreation dbCreation;
-    AlertDialog alertDialog;
 
 
     @Override
@@ -33,45 +33,33 @@ public class LoginPage extends AppCompatActivity {
         if(editText_userName!=null && editText_password!=null){
 
             boolean isAccountAuthenticated= ValidateInputs.checkLogInDetails(editText_userName,editText_password,getApplicationContext());
-            boolean isUserOnline=ValidateInputs.isInternetAvailable();
-            if(isAccountAuthenticated && isUserOnline){
+            userName=editText_userName.getText().toString();
+            if(isAccountAuthenticated){
 
                 setupUserProfile();
+                //setSession();
                 Intent intent = new Intent(this, WelcomeScreen.class);
                 startActivity(intent);
 
             }else
             {
-                if(!isUserOnline){
-                    generatePopupMessage("Please check internet connection.");
-                }else {
-                    generatePopupMessage("Please check login details and try again");
-                }
+                //popups
             }
         }
+
     }
 
     public void onClickRegisterButton(View view) {
 
-        if(ValidateInputs.isInternetAvailable()) {
-
-            Intent intent = new Intent(this, RegisterNewUser.class);
-            startActivity(intent);
-        }else{
-            generatePopupMessage("Please check internet connection.");
-        }
+        Intent intent = new Intent(this, RegisterNewUser.class);
+        startActivity(intent);
     }
 
 
     public void onClickForgotPassword(View view) {
 
-        if(ValidateInputs.isInternetAvailable()) {
-
-            Intent intent = new Intent(this, ForgotPassword.class);
-            startActivity(intent);
-        }else{
-            generatePopupMessage("Please check internet connection.");
-        }
+        Intent intent = new Intent(this, ForgotPassword.class);
+        startActivity(intent);
     }
 
     private void setupUserProfile(){
@@ -86,6 +74,8 @@ public class LoginPage extends AppCompatActivity {
             dbCreation.populateUerSpecificTables(userName);
             setSession();
         }
+
+
     }
 
     private void setSession(){
@@ -93,8 +83,10 @@ public class LoginPage extends AppCompatActivity {
         Session.setLoginStatus(true,getApplicationContext());
     }
 
-    private void generatePopupMessage(String message){
-        alertDialog.setMessage(message);
-        alertDialog.show();
+    private void updateLoggedUsersTable(){
+
+        dbCreation=new DBCreation(getApplicationContext(), Constants.DATABASE_NAME,null,Constants.DATABASE_VERSION);
+
+
     }
 }
