@@ -1,13 +1,17 @@
 package eazylivings.com.eazylivings.validators;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.preference.PreferenceManager;
 import android.widget.EditText;
 
 import java.net.InetAddress;
 
+import eazylivings.com.eazylivings.constants.Constants;
 import eazylivings.com.eazylivings.database.ServerDatabaseHandler;
+import eazylivings.com.eazylivings.sessionmanagement.Session;
 
 /**
  * Created by shweagar on 5/18/2016.
@@ -30,7 +34,7 @@ public class ValidateInputs {
         }
     }
 
-    public static boolean checkPassword(EditText password){
+    public static boolean checkPasswordForamt(EditText password){
 
         if(password!=null){
             if(password.getText().toString().matches("^(?=.*[A-Za-z])(?=.*\\d)(?=.*[$@$!%*#?&])[A-Za-z\\d$@$!%*#?&]{8,}$")){
@@ -44,7 +48,7 @@ public class ValidateInputs {
     }
 
 
-    public static boolean validateEmailAddress(EditText emailAddress){
+    public static boolean checEmailFormat(EditText emailAddress){
 
         if(emailAddress!=null) {
 
@@ -54,7 +58,7 @@ public class ValidateInputs {
         }
     }
 
-    public static boolean checkUsername(EditText userName){
+    public static boolean checkUsernameFormat(EditText userName){
 
         if(userName!=null ){
 
@@ -68,9 +72,9 @@ public class ValidateInputs {
         }
     }
 
-    public static boolean checkExistingUser(EditText userName){
+    public static boolean checkExistingUser(EditText userName, Context context){
 
-        ServerDatabaseHandler serverDatabaseHandler=new ServerDatabaseHandler();
+        ServerDatabaseHandler serverDatabaseHandler=new ServerDatabaseHandler(context);
         if(userName!=null){
             return serverDatabaseHandler.getExistingUser(userName.getText().toString());
         }else
@@ -92,7 +96,7 @@ public class ValidateInputs {
 
     }
 
-    public boolean isInternetAvailable() {
+    public static boolean isInternetAvailable() {
         try {
             InetAddress ipAddr = InetAddress.getByName("google.com"); //You can replace it with your name
 
@@ -116,5 +120,24 @@ public class ValidateInputs {
                 activeNetwork.isConnectedOrConnecting();
 
         return  activeNetwork.getType() == ConnectivityManager.TYPE_WIFI;
+    }
+
+    public static boolean checkLogInDetails(EditText userName, EditText password,Context context){
+
+       ServerDatabaseHandler serverDatabaseHandler=new ServerDatabaseHandler(context);
+        try{
+            serverDatabaseHandler.execute(Constants.LOGIN,userName.getText().toString(),password.getText().toString());
+        }catch(Exception e){
+
+        }
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
+
+        String result= prefs.getString("result","result");
+
+        if(result.equalsIgnoreCase("Login Successful!!! Welcome")){
+            return true;
+        }else{
+            return false;
+        }
     }
 }
