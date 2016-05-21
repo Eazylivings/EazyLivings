@@ -1,7 +1,7 @@
 package eazylivings.com.eazylivings.activities.login;
 
-import android.content.Intent;
-import android.support.v7.app.ActionBar;
+
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -11,14 +11,16 @@ import android.widget.EditText;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import org.w3c.dom.Text;
-
 import eazylivings.com.eazylivings.R;
-import eazylivings.com.eazylivings.validators.ValidateInputs;
+import eazylivings.com.eazylivings.constants.Constants;
+import eazylivings.com.eazylivings.database.ServerDatabaseHandler;
+import eazylivings.com.eazylivings.sessionmanagement.Session;
+
 
 public class ForgotPassword extends AppCompatActivity {
 
     Button backButton;
+    AlertDialog alertDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,14 +28,7 @@ public class ForgotPassword extends AppCompatActivity {
         setContentView(R.layout.activity_forgot_password);
 
         backButton = (Button)findViewById(R.id.forgotPassword_button_backToLogin);
-        if (backButton != null) {
-            backButton.setOnClickListener(new Button.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    finish();
-                }
-            });
-        }
+        backButtonListener(backButton);
     }
 
     public void onClickRetrievePassword(View view){
@@ -44,68 +39,59 @@ public class ForgotPassword extends AppCompatActivity {
         boolean isEmailSuccessfullySent=false;
 
 
-        /*if(emailAddress!=null){
-            isEmailSuccessfullySent=sendEmailForPasswordretrieval(emailAddress);
+        if(emailAddress!=null){
+            isEmailSuccessfullySent=sendEmailForPasswordRetrieval(emailAddress);
         }else{
             generatePopupMessages("Please check email Address.");
-        }*/
-
-        if(isEmailSuccessfullySent ){
-
-            if(emailAddress!=null && retrievePassword!=null && defaultMessage!=null) {
-                emailAddress.setVisibility(View.GONE);
-                retrievePassword.setVisibility(View.GONE);
-                defaultMessage.setText("An Email has been sent to your registered email address.Please login with the One time password in the mails."+
-                        " You can change the password by updating User Profile");
-            }
-
-            RelativeLayout.LayoutParams layoutParams = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT,
-                    ViewGroup.LayoutParams.WRAP_CONTENT);
-            layoutParams.addRule(RelativeLayout.BELOW, R.id.forgotPassword_button_retrievePassword);
-            layoutParams.addRule(RelativeLayout.CENTER_HORIZONTAL);
-
-
-            if (backButton != null) {
-                backButton.setLayoutParams(layoutParams);
-                backButton.setOnClickListener(new Button.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        finish();
-                    }
-                });
-            }
-        }else{
-
-            if(emailAddress!=null && retrievePassword!=null && defaultMessage!=null) {
-                emailAddress.setVisibility(View.GONE);
-                retrievePassword.setVisibility(View.GONE);
-                defaultMessage.setText("An error Occurred while resetting your password. Please try again after sometime.");
-            }
-
-            RelativeLayout.LayoutParams layoutParams = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT,
-                    ViewGroup.LayoutParams.WRAP_CONTENT);
-            layoutParams.addRule(RelativeLayout.BELOW, R.id.forgotPassword_button_retrievePassword);
-            layoutParams.addRule(RelativeLayout.CENTER_HORIZONTAL);
-
-
-            if (backButton != null) {
-                backButton.setLayoutParams(layoutParams);
-                backButton.setOnClickListener(new Button.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        finish();
-                    }
-                });
-            }
         }
+        if(emailAddress!=null && retrievePassword!=null && defaultMessage!=null) {
+
+            emailAddress.setVisibility(View.GONE);
+            retrievePassword.setVisibility(View.GONE);
+        }
+        if(isEmailSuccessfullySent && defaultMessage!=null){
+            defaultMessage.setText(Constants.MESSAGE_FOR_SUCCESSFUL_RESET_PASSWORD);
+        }else if(defaultMessage!=null){
+            defaultMessage.setText(Constants.MESSAGE_FAIL_RESET_PASSWORD);
+        }
+        RelativeLayout.LayoutParams layoutParams = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT,
+                ViewGroup.LayoutParams.WRAP_CONTENT);
+        layoutParams.addRule(RelativeLayout.BELOW, R.id.forgotPassword_button_retrievePassword);
+        layoutParams.addRule(RelativeLayout.CENTER_HORIZONTAL);
+        if(backButton!=null){
+            backButton.setLayoutParams(layoutParams);
+            backButtonListener(backButton);
+        }
+
     }
 
-    private boolean sendEmailForPasswordretrieval(EditText emailAddress){
+    private boolean sendEmailForPasswordRetrieval(EditText emailAddress){
 
-       return false;
+        ServerDatabaseHandler serverDatabaseHandler=new ServerDatabaseHandler(getApplicationContext());
+        serverDatabaseHandler.execute(Constants.FORGOTPASSWORD,emailAddress.getText().toString());
+
+        String activityResult= Session.getActivityResult(getApplicationContext());
+
+        return activityResult.equalsIgnoreCase("Email successfully sent");
     }
 
     private void generatePopupMessages(String message){
+
+        alertDialog.setMessage(message);
+        alertDialog.show();
+
+    }
+
+    private void backButtonListener(Button backButton){
+
+        if (backButton != null) {
+            backButton.setOnClickListener(new Button.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    finish();
+                }
+            });
+        }
 
     }
 
