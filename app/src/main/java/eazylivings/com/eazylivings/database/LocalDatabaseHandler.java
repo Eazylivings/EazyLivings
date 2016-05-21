@@ -35,15 +35,7 @@ public class LocalDatabaseHandler extends SQLiteOpenHelper{
         db.close();
     }
 
-    //Delete some information from Table
 
-    public void deleteDetails(String uniqueIdentifier){
-
-        SQLiteDatabase db=getWritableDatabase();
-        db.execSQL("DELETE FROM "+ Constants.SIGNUP_DETAILS_TABLE +
-                " WHERE "+ Constants.COLUMN_USERNAME + " =\" " + uniqueIdentifier + "\"");
-
-    }
 
     //Select details from Table
 
