@@ -2,7 +2,9 @@ package eazylivings.com.eazylivings.database;
 
 import android.app.AlertDialog;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
+import android.preference.PreferenceManager;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -16,17 +18,18 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLEncoder;
 
-/**
- * Created by user on 5/15/2016.
- */
+import eazylivings.com.eazylivings.sessionmanagement.Session;
+
 public class ServerDatabaseHandler extends AsyncTask<String,Void,String>  {
 
     Context context;
     AlertDialog alertDialog;
+    static String result="";
 
     public ServerDatabaseHandler(Context ctx){
         context=ctx;
     }
+
     @Override
     protected String doInBackground(String... params) {
 
@@ -53,7 +56,7 @@ public class ServerDatabaseHandler extends AsyncTask<String,Void,String>  {
 
                 InputStream inputStream = httpUrlConnection.getInputStream();
                 BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream, "iso-8859-1"));
-                String result = "";
+
                 String line = "";
 
                 while ((line = bufferedReader.readLine()) != null) {
@@ -63,6 +66,8 @@ public class ServerDatabaseHandler extends AsyncTask<String,Void,String>  {
                 bufferedReader.close();
                 inputStream.close();
                 httpUrlConnection.disconnect();
+                SharedPreferences preferences= PreferenceManager.getDefaultSharedPreferences(context);
+                preferences.edit().putString("result",result).commit();
                 return result;
             } catch (MalformedURLException e) {
                 String connectError="Please Check Network Connection";
@@ -108,3 +113,4 @@ public class ServerDatabaseHandler extends AsyncTask<String,Void,String>  {
         return password;
     }
 }
+

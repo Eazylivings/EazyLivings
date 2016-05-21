@@ -19,21 +19,27 @@ public class Session {
         prefs.edit().putString("userName",userName).commit();
     }
 
+    public static void setActivityResult(String result,Context context){
+
+        prefs = PreferenceManager.getDefaultSharedPreferences(context);
+        prefs.edit().putString("result",result).commit();
+    }
+
     public static boolean getLoginStatus(Context context){
 
         prefs = PreferenceManager.getDefaultSharedPreferences(context);
-        boolean isUserLoggedIn=prefs.getBoolean("loginStatus",false);
 
-        return isUserLoggedIn;
-
+        return prefs.getBoolean("loginStatus",false);
     }
 
     public static String getusername(Context context){
         prefs = PreferenceManager.getDefaultSharedPreferences(context);
-        String userName=prefs.getString("userName","NEWUSER");
 
-        return userName;
+        return prefs.getString("userName","NEWUSER");
+    }
+    public static String getActivityResult(Context context){
+        prefs = PreferenceManager.getDefaultSharedPreferences(context);
 
-
+        return prefs.getString("result","");
     }
 }

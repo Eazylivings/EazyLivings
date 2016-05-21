@@ -2,11 +2,13 @@ package eazylivings.com.eazylivings.activities.login;
 
 import android.content.ContentValues;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.EditText;
 
 import eazylivings.com.eazylivings.R;
+import eazylivings.com.eazylivings.VO.UserDetails;
 import eazylivings.com.eazylivings.constants.Constants;
 import eazylivings.com.eazylivings.database.ServerDatabaseHandler;
 import eazylivings.com.eazylivings.firsttimeinstallation.DBCreation;
@@ -16,6 +18,7 @@ import eazylivings.com.eazylivings.validators.ValidateInputs;
 public class RegisterNewUser extends AppCompatActivity {
 
     DBCreation dbCreation;
+    AlertDialog alertDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,14 +41,17 @@ public class RegisterNewUser extends AppCompatActivity {
 
         if(isUserNameFormatCorrect && isEmailFormatCorrect && isConfirmPasswordCorrect && !isUserAlreadyPresent && isPasswordFormatCorrect){
 
+            UserDetails userDetails=new UserDetails();
             dbCreation=new DBCreation(this,Constants.DATABASE_NAME,null,Constants.DATABASE_VERSION);
-            ContentValues values=new ContentValues();
-            values.put(Constants.COLUMN_USERNAME,userName.getText().toString());
-            values.put(Constants.COLUMN_EMAIL_ADDRESS,emailAddress.getText().toString());
-            values.put(Constants.COLUMN_PASSWORD,password.getText().toString());
+
+            userDetails.setFirst_name("");
+            userDetails.setLast_name("");
+            userDetails.setEmail_address("");
+            userDetails.setContact_number("");
+            userDetails.setPassword("");
 
             dbCreation.insertServicesIntoTable();
-            dbCreation.insertUserDetails(values);
+            dbCreation.insertUserDetails(userDetails);
             dbCreation.createUserSpecificTables(userName.getText().toString());
             Session.setLogUserName(userName.getText().toString(),getApplicationContext());
             Session.setLoginStatus(true,getApplicationContext());
@@ -75,9 +81,7 @@ public class RegisterNewUser extends AppCompatActivity {
         }
     }
 
-
-
     private void generatePopupMessages(String message){
-
+        alertDialog.setMessage(message);
     }
 }
