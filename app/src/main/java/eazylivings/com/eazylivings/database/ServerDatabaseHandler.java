@@ -80,8 +80,58 @@ public class ServerDatabaseHandler extends AsyncTask<String,Void,String>  {
 
 
 
+        }else if (type.equals("register")){
+            {
+                String registerUrl="http://eazylivings.com/register.php";
+                try {
+                    URL url = new URL(registerUrl);
+                    HttpURLConnection httpUrlConnection = (HttpURLConnection) url.openConnection();
+                    httpUrlConnection.setRequestMethod("POST");
+                    httpUrlConnection.setDoOutput(true);
+                    httpUrlConnection.setDoInput(true);
+                    OutputStream outputStream = httpUrlConnection.getOutputStream();
+                    BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(outputStream, "UTF-8"));
+
+                    String user_name = params[1];
+                    String password = params[2];
+                    String email=params[3];
+                    String phoneNo=params[4];
+                        String post_data = URLEncoder.encode("user_name", "UTF-8") + "=" + URLEncoder.encode(email, "UTF-8") + "&"
+                                + URLEncoder.encode("password", "UTF-8") + "=" + URLEncoder.encode(password, "UTF-8")+"&"
+                                + URLEncoder.encode("name", "UTF-8") + "=" + URLEncoder.encode(user_name, "UTF-8")+"&"
+                                + URLEncoder.encode("phoneNo", "UTF-8") + "=" + URLEncoder.encode(phoneNo, "UTF-8");
+                        bufferedWriter.write(post_data);
+                        bufferedWriter.flush();
+                        bufferedWriter.close();
+                        outputStream.close();
+
+                        InputStream inputStream = httpUrlConnection.getInputStream();
+                        BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream, "iso-8859-1"));
+                        String line = "";
+
+                        while ((line = bufferedReader.readLine()) != null) {
+                            result += line;
+                        }
+
+                        bufferedReader.close();
+                        inputStream.close();
+                        httpUrlConnection.disconnect();
+
+                    return result;
+                } catch (MalformedURLException e) {
+                    String connectError="Please Check Network Connection";
+                    alertDialog.setMessage(connectError);
+                    alertDialog.show();
+                    e.printStackTrace();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+
+
+
+            }
         }
-        return null;
+        return result;
     }
 
     @Override

@@ -2,6 +2,7 @@ package eazylivings.com.eazylivings.activities.login;
 
 import android.content.ContentValues;
 import android.os.Bundle;
+import android.os.Looper;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -31,21 +32,30 @@ public class RegisterNewUser extends AppCompatActivity {
         EditText userName=(EditText)findViewById(R.id.newUser_text_userName);
         EditText emailAddress=(EditText)findViewById(R.id.newUser_text_email);
         EditText password=(EditText)findViewById(R.id.newUser_text_password);
-        EditText confirmPassword=(EditText)findViewById(R.id.newUser_text_confirmPassword);
+        EditText contactNo=(EditText)findViewById(R.id.newUser_text_contactNo);
 
         boolean isEmailFormatCorrect=ValidateInputs.checEmailFormat(emailAddress);
-        boolean isConfirmPasswordCorrect=ValidateInputs.checkPassWordAndConfirmPassword(password,confirmPassword);
         boolean isUserAlreadyPresent=ValidateInputs.checkExistingUser(userName,getApplicationContext());
         boolean isUserNameFormatCorrect=ValidateInputs.checkUsernameFormat(userName);
         boolean isPasswordFormatCorrect=ValidateInputs.checkPasswordForamt(password);
 
-        if(isUserNameFormatCorrect && isEmailFormatCorrect && isConfirmPasswordCorrect && !isUserAlreadyPresent && isPasswordFormatCorrect){
+        ServerDatabaseHandler serverDatabaseHandler=new ServerDatabaseHandler(getApplicationContext());
+        if(userName!=null && password!=null && emailAddress!=null&&contactNo!=null) {
+            Looper.prepare();
+            serverDatabaseHandler.execute("register", userName.toString(), password.toString(), emailAddress.toString(), contactNo.toString());
+
+        }
+
+
+
+
+
+        if(isUserNameFormatCorrect && isEmailFormatCorrect && !isUserAlreadyPresent && isPasswordFormatCorrect){
 
             UserDetails userDetails=new UserDetails();
             dbCreation=new DBCreation(this,Constants.DATABASE_NAME,null,Constants.DATABASE_VERSION);
 
             userDetails.setFirst_name("");
-            userDetails.setLast_name("");
             userDetails.setEmail_address("");
             userDetails.setContact_number("");
             userDetails.setPassword("");
