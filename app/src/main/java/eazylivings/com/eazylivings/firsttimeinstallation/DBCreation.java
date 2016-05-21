@@ -8,6 +8,8 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 import java.util.ArrayList;
 
+import eazylivings.com.eazylivings.VO.UserDetails;
+import eazylivings.com.eazylivings.activities.UserProfile;
 import eazylivings.com.eazylivings.constants.Constants;
 
 public class DBCreation  extends SQLiteOpenHelper {
@@ -61,12 +63,20 @@ public class DBCreation  extends SQLiteOpenHelper {
 
     public void createUserSpecificTables(String userName){
 
-        db.execSQL("CREATE TABLE user_details_"+userName+"(_id  INTEGER PRIMARY KEY AUTOINCREMENT,user_name TEXT,"+
+        if(userName!=null){
+            userName=userName.split("@")[0];
+        }
+
+        db.execSQL("CREATE TABLE user_details_"+userName+"(_id  INTEGER PRIMARY KEY AUTOINCREMENT,"+
                 " first_name TEXT, last_name TEXT, email_address TEXT, contact_number TEXT, residential_address TEXT )");
         db.execSQL("CREATE TABLE user_preferences_"+userName+"(_id INTEGER PRIMARY KEY AUTOINCREMENT,service_name TEXT, is_subscribed BOOLEAN)");
     }
 
     public boolean checkIfUserSpecificTableExists(String userName){
+
+        if(userName!=null){
+            userName=userName.split("@")[0];
+        }
 
         Cursor cursor = db.rawQuery("select DISTINCT tbl_name from sqlite_master where tbl_name = 'user_details_"+userName+"'", null);
         if(cursor!=null) {
@@ -88,7 +98,14 @@ public class DBCreation  extends SQLiteOpenHelper {
     }
 
     //At time of registration, users details like username, email address and password will be stored here. Phone number can also be captured
-    public void insertUserDetails(ContentValues values){
+    public void insertUserDetails(UserDetails userDetails){
+
+        ContentValues values=new ContentValues();
+        values.put(Constants.COLUMN_FIRST_NAME,userDetails.getFirst_name());
+        values.put(Constants.COLUMN_LAST_NAME,userDetails.getLast_name());
+        values.put(Constants.COLUMN_EMAIL_ADDRESS,userDetails.getEmail_address());
+        values.put(Constants.COLUMN_CONTACT_NUMBER,userDetails.getContact_number());
+        values.put(Constants.COLUMN_PASSWORD,userDetails.getPassword());
 
         db=getWritableDatabase();
         db.insert(Constants.USER_DETAILS_TABLE,null,values);
