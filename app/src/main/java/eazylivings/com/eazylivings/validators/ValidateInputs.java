@@ -7,48 +7,24 @@ import android.net.NetworkInfo;
 import android.preference.PreferenceManager;
 import android.widget.EditText;
 
-import java.net.InetAddress;
-
 import eazylivings.com.eazylivings.constants.Constants;
 import eazylivings.com.eazylivings.database.ServerDatabaseHandler;
-import eazylivings.com.eazylivings.sessionmanagement.Session;
 
-/**
- * Created by shweagar on 5/18/2016.
- */
+
 public class ValidateInputs {
 
-    public static boolean checkPassWordAndConfirmPassword(EditText password, EditText confirmPassword)
-    {
 
-        if (confirmPassword != null && password != null)
-        {
-            if (password.equals(confirmPassword))
-            {
-                return true;
-            }else{
-                return false;
-            }
-        }else{
-            return false;
-        }
-    }
-
-    public static boolean checkPasswordForamt(EditText password){
+    public static boolean checkPasswordFormat(EditText password){
 
         if(password!=null){
-            if(password.getText().toString().matches("^(?=.*[A-Za-z])(?=.*\\d)(?=.*[$@$!%*#?&])[A-Za-z\\d$@$!%*#?&]{8,}$")){
-                return true;
-            }else{
-                return false;
-            }
+            return password.getText().toString().matches("^(?=.*[A-Za-z])(?=.*\\d)(?=.*[$@$!%*#?&])[A-Za-z\\d$@$!%*#?&]{8,}$");
         }else{
             return false;
         }
     }
 
 
-    public static boolean checEmailFormat(EditText emailAddress){
+    public static boolean checkEmailFormat(EditText emailAddress){
 
         if(emailAddress!=null) {
 

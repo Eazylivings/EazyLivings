@@ -3,6 +3,8 @@ package eazylivings.com.eazylivings.activities.login;
 import android.app.Activity;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
 import android.support.v7.app.AlertDialog;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -13,7 +15,6 @@ import eazylivings.com.eazylivings.R;
 import eazylivings.com.eazylivings.activities.MainActivity;
 import eazylivings.com.eazylivings.activities.WelcomeScreen;
 import eazylivings.com.eazylivings.firsttimeinstallation.DBCreation;
-import eazylivings.com.eazylivings.sessionmanagement.Session;
 import eazylivings.com.eazylivings.validators.ValidateInputs;
 
 public class LoginPage extends AppCompatActivity {
@@ -90,8 +91,9 @@ public class LoginPage extends AppCompatActivity {
     }
 
     private void setSession(){
-        Session.setLogUserName(userName,getApplicationContext());
-        Session.setLoginStatus(true,getApplicationContext());
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+        prefs.edit().putBoolean("loginStatus", true).commit();
+        prefs.edit().putString("userName", userName).commit();
     }
 
     private void generatePopupMessage(String message){

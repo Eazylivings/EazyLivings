@@ -3,13 +3,14 @@ package eazylivings.com.eazylivings.activities;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Handler;
+import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
 import eazylivings.com.eazylivings.R;
 import eazylivings.com.eazylivings.activities.login.LoginPage;
-import eazylivings.com.eazylivings.sessionmanagement.Session;
 
 public class MainActivity extends Activity {
 
@@ -17,10 +18,9 @@ public class MainActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        final SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
 
-        final boolean isUserLoggedIn= Session.getLoginStatus(getApplicationContext());
-
-
+        final boolean isUserLoggedIn= prefs.getBoolean("loginStatus",false);
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
@@ -29,12 +29,12 @@ public class MainActivity extends Activity {
                     mainIntent = new Intent(MainActivity.this, LoginPage.class);
                 }else{
                     mainIntent = new Intent(MainActivity.this, WelcomeScreen.class);
-                    mainIntent.putExtra("userName",Session.getusername(getApplicationContext()));
+                    mainIntent.putExtra("userName",prefs.getString("userName","NEWUSER"));
                 }
                 MainActivity.this.startActivity(mainIntent);
                 MainActivity.this.finish();
             }
-        }, 2500);
+        }, 1500);
 
 
     }

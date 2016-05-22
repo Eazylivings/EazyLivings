@@ -18,8 +18,6 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLEncoder;
 
-import eazylivings.com.eazylivings.sessionmanagement.Session;
-
 public class ServerDatabaseHandler extends AsyncTask<String,Void,String>  {
 
     Context context;

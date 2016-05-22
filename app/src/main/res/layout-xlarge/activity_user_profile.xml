@@ -91,9 +91,17 @@
         android:layout_height="wrap_content"
         android:text="Update Profile"
         android:id="@+id/userProfile_button_updateProfile"
-        android:layout_alignParentBottom="true"
-        android:layout_alignLeft="@+id/userProfile_imageView_userImage"
+        android:onClick="updateUserProfile"
+        android:layout_below="@+id/userProfile_text_address"
         android:layout_alignStart="@+id/userProfile_imageView_userImage"
-        android:onClick="updateUserProfile" />
+        android:layout_marginTop="37dp" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Go Back"
+        android:id="@+id/userProfile_button_back"
+        android:layout_below="@+id/userProfile_button_updateProfile"
+        android:layout_toEndOf="@+id/userProfile_imageView_userImage" />
 
 </RelativeLayout>

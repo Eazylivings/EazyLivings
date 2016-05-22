@@ -1,10 +1,10 @@
 package eazylivings.com.eazylivings.activities.login;
 
-import android.app.Activity;
-import android.content.ContentValues;
 import android.content.DialogInterface;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Looper;
+import android.preference.PreferenceManager;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -15,7 +15,6 @@ import eazylivings.com.eazylivings.VO.UserDetails;
 import eazylivings.com.eazylivings.constants.Constants;
 import eazylivings.com.eazylivings.database.ServerDatabaseHandler;
 import eazylivings.com.eazylivings.firsttimeinstallation.DBCreation;
-import eazylivings.com.eazylivings.sessionmanagement.Session;
 import eazylivings.com.eazylivings.validators.ValidateInputs;
 
 public class RegisterNewUser extends AppCompatActivity {
@@ -36,10 +35,10 @@ public class RegisterNewUser extends AppCompatActivity {
         EditText password=(EditText)findViewById(R.id.newUser_text_password);
         EditText contactNo=(EditText)findViewById(R.id.newUser_text_contactNo);
 
-        boolean isEmailFormatCorrect=ValidateInputs.checEmailFormat(emailAddress);
+        boolean isEmailFormatCorrect=ValidateInputs.checkEmailFormat(emailAddress);
         boolean isUserAlreadyPresent=ValidateInputs.checkExistingUser(userName,getApplicationContext());
         boolean isUserNameFormatCorrect=ValidateInputs.checkUsernameFormat(userName);
-        boolean isPasswordFormatCorrect=ValidateInputs.checkPasswordForamt(password);
+        boolean isPasswordFormatCorrect=ValidateInputs.checkPasswordFormat(password);
 
         ServerDatabaseHandler serverDatabaseHandler=new ServerDatabaseHandler(getApplicationContext());
         if(userName!=null && password!=null && emailAddress!=null&&contactNo!=null) {
@@ -65,8 +64,9 @@ public class RegisterNewUser extends AppCompatActivity {
             dbCreation.insertServicesIntoTable();
             dbCreation.insertUserDetails(userDetails);
             dbCreation.createUserSpecificTables(userName.getText().toString());
-            Session.setLogUserName(userName.getText().toString(),getApplicationContext());
-            Session.setLoginStatus(true,getApplicationContext());
+            SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+            prefs.edit().putBoolean("loginStatus", true).apply();
+            prefs.edit().putString("userName", userName.getText().toString()).apply();
 
 
         }else{

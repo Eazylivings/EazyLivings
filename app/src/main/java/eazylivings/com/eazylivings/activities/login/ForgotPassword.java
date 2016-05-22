@@ -16,8 +16,6 @@ import android.widget.TextView;
 import eazylivings.com.eazylivings.R;
 import eazylivings.com.eazylivings.constants.Constants;
 import eazylivings.com.eazylivings.database.ServerDatabaseHandler;
-import eazylivings.com.eazylivings.sessionmanagement.Session;
-
 
 public class ForgotPassword extends AppCompatActivity {
 
@@ -72,7 +70,7 @@ public class ForgotPassword extends AppCompatActivity {
         ServerDatabaseHandler serverDatabaseHandler=new ServerDatabaseHandler(getApplicationContext());
         serverDatabaseHandler.execute(Constants.FORGOTPASSWORD,emailAddress.getText().toString());
 
-        String activityResult= Session.getActivityResult(getApplicationContext());
+        String activityResult="";
 
         return activityResult.equalsIgnoreCase("Email successfully sent");
     }
