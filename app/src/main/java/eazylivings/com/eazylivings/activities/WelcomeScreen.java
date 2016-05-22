@@ -15,7 +15,7 @@ import eazylivings.com.eazylivings.activities.login.LoginPage;
 
 public class WelcomeScreen extends AppCompatActivity {
 
-    String welcomeText="Welcome";
+    String welcomeText="Welcome ";
     String userName;
 
     @Override
@@ -29,7 +29,8 @@ public class WelcomeScreen extends AppCompatActivity {
             userName = prefs.getString("userName", "NEWUSER");
         }
         if(text!=null) {
-            text.setText(welcomeText + userName);
+            welcomeText=welcomeText+userName;
+            text.setText(welcomeText);
         }
     }
 
@@ -56,7 +57,7 @@ public class WelcomeScreen extends AppCompatActivity {
                 intent = new Intent(this, LoginPage.class);
                 startActivity(intent);
                 SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
-                prefs.edit().putBoolean("loginStatus", true).apply();
+                prefs.edit().putBoolean("loginStatus", false).apply();
                 break;
         }
         return true;

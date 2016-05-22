@@ -1,6 +1,5 @@
 package eazylivings.com.eazylivings.activities.login;
 
-import android.app.Activity;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -12,7 +11,6 @@ import android.view.View;
 import android.widget.EditText;
 
 import eazylivings.com.eazylivings.R;
-import eazylivings.com.eazylivings.activities.MainActivity;
 import eazylivings.com.eazylivings.activities.WelcomeScreen;
 import eazylivings.com.eazylivings.firsttimeinstallation.DBCreation;
 import eazylivings.com.eazylivings.validators.ValidateInputs;
@@ -33,23 +31,28 @@ public class LoginPage extends AppCompatActivity {
 
         if(editText_userName!=null && editText_password!=null){
 
-            boolean isAccountAuthenticated= ValidateInputs.checkLogInDetails(editText_userName,editText_password,getApplicationContext());
+
+
             boolean isUserOnline=ValidateInputs.isInternetAvailable(getApplicationContext());
-            if(isAccountAuthenticated && isUserOnline){
+            if(isUserOnline){
+                boolean isAccountAuthenticated= ValidateInputs.checkLogInDetails(editText_userName,editText_password,getApplicationContext());
+                if(isAccountAuthenticated){
 
-                //setupUserProfile();
-                setSession();
-                Intent intent = new Intent(this, WelcomeScreen.class);
-                startActivity(intent);
+                    userName=editText_userName.getText().toString();
+                    //setupUserProfile();
+                    setSession();
+                    Intent intent = new Intent(this, WelcomeScreen.class);
+                    startActivity(intent);
 
-            }else
-            {
-                if(!isUserOnline){
-                    generatePopupMessage("Please check internet connection.");
-                }else {
+                }else
+                {
                     generatePopupMessage("Please check login details and try again");
                 }
+
+            }else{
+                generatePopupMessage("Please check internet connection.");
             }
+
         }
     }
 
@@ -63,7 +66,6 @@ public class LoginPage extends AppCompatActivity {
             generatePopupMessage("Please check internet connection.");
         }
     }
-
 
     public void onClickForgotPassword(View view) {
 
@@ -92,8 +94,8 @@ public class LoginPage extends AppCompatActivity {
 
     private void setSession(){
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
-        prefs.edit().putBoolean("loginStatus", true).commit();
-        prefs.edit().putString("userName", userName).commit();
+        prefs.edit().putBoolean("loginStatus", true).apply();
+        prefs.edit().putString("userName", userName).apply();
     }
 
     private void generatePopupMessage(String message){
