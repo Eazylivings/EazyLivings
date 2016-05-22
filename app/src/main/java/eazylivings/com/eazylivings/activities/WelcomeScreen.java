@@ -1,5 +1,6 @@
 package eazylivings.com.eazylivings.activities;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -10,7 +11,7 @@ import eazylivings.com.eazylivings.R;
 import eazylivings.com.eazylivings.activities.login.LoginPage;
 import eazylivings.com.eazylivings.sessionmanagement.Session;
 
-public class WelcomeScreen extends AppCompatActivity {
+public class WelcomeScreen extends Activity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

@@ -1,5 +1,6 @@
 package eazylivings.com.eazylivings.activities.login;
 
+import android.app.Activity;
 import android.content.ContentValues;
 import android.os.Bundle;
 import android.os.Looper;
@@ -16,7 +17,7 @@ import eazylivings.com.eazylivings.firsttimeinstallation.DBCreation;
 import eazylivings.com.eazylivings.sessionmanagement.Session;
 import eazylivings.com.eazylivings.validators.ValidateInputs;
 
-public class RegisterNewUser extends AppCompatActivity {
+public class RegisterNewUser extends Activity {
 
     DBCreation dbCreation;
     AlertDialog alertDialog;

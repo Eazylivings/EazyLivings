@@ -8,6 +8,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
 import eazylivings.com.eazylivings.R;
+import eazylivings.com.eazylivings.activities.login.LoginPage;
 import eazylivings.com.eazylivings.sessionmanagement.Session;
 
 public class MainActivity extends Activity {

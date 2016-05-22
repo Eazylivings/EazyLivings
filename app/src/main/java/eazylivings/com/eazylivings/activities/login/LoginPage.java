@@ -1,5 +1,6 @@
 package eazylivings.com.eazylivings.activities.login;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -13,7 +14,7 @@ import eazylivings.com.eazylivings.firsttimeinstallation.DBCreation;
 import eazylivings.com.eazylivings.sessionmanagement.Session;
 import eazylivings.com.eazylivings.validators.ValidateInputs;
 
-public class LoginPage extends AppCompatActivity {
+public class LoginPage extends Activity {
 
     private String userName;
     DBCreation dbCreation;

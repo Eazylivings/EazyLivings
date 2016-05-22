@@ -1,6 +1,7 @@
 package eazylivings.com.eazylivings.activities.login;
 
 
+import android.app.Activity;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -17,7 +18,7 @@ import eazylivings.com.eazylivings.database.ServerDatabaseHandler;
 import eazylivings.com.eazylivings.sessionmanagement.Session;
 
 
-public class ForgotPassword extends AppCompatActivity {
+public class ForgotPassword extends Activity {
 
     Button backButton;
     AlertDialog alertDialog;

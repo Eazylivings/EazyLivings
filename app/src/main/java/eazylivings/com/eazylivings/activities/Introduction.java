@@ -1,5 +1,6 @@
 package eazylivings.com.eazylivings.activities;
 
+import android.app.Activity;
 import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
 import android.os.Handler;
@@ -12,7 +13,7 @@ import java.util.ArrayList;
 
 import eazylivings.com.eazylivings.R;
 
-public class Introduction extends AppCompatActivity {
+public class Introduction extends Activity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
