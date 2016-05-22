@@ -13,7 +13,7 @@ import java.util.ArrayList;
 
 import eazylivings.com.eazylivings.R;
 
-public class Introduction extends Activity {
+public class Introduction extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

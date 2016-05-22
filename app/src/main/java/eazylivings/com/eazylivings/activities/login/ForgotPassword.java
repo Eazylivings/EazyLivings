@@ -2,6 +2,7 @@ package eazylivings.com.eazylivings.activities.login;
 
 
 import android.app.Activity;
+import android.content.DialogInterface;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -18,7 +19,7 @@ import eazylivings.com.eazylivings.database.ServerDatabaseHandler;
 import eazylivings.com.eazylivings.sessionmanagement.Session;
 
 
-public class ForgotPassword extends Activity {
+public class ForgotPassword extends AppCompatActivity {
 
     Button backButton;
     AlertDialog alertDialog;
@@ -78,8 +79,18 @@ public class ForgotPassword extends Activity {
 
     private void generatePopupMessages(String message){
 
-        alertDialog.setMessage(message);
-        alertDialog.show();
+        {
+            AlertDialog alertDialog = new AlertDialog.Builder(ForgotPassword.this).create();
+            alertDialog.setTitle("Alert");
+            alertDialog.setMessage(message);
+            alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
+                    new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.dismiss();
+                        }
+                    });
+            alertDialog.show();
+        }
 
     }
 

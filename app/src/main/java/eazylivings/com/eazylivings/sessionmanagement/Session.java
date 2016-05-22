@@ -10,13 +10,21 @@ public class Session {
 
     public static void setLoginStatus(boolean isUserLoggedIn,Context context){
 
-        prefs = PreferenceManager.getDefaultSharedPreferences(context);
-        prefs.edit().putBoolean("loginStatus",isUserLoggedIn).commit();
+        if(prefs!=null) {
+            prefs.edit().remove("loginStatus");
+            prefs.edit().commit();
+            prefs = PreferenceManager.getDefaultSharedPreferences(context);
+            prefs.edit().putBoolean("loginStatus", isUserLoggedIn).commit();
+        }
     }
     public static void setLogUserName(String userName,Context context){
 
-        prefs = PreferenceManager.getDefaultSharedPreferences(context);
-        prefs.edit().putString("userName",userName).commit();
+        if(prefs!=null) {
+            prefs.edit().remove("userName");
+            prefs.edit().commit();
+            prefs = PreferenceManager.getDefaultSharedPreferences(context);
+            prefs.edit().putString("userName", userName).commit();
+        }
     }
 
     public static void setActivityResult(String result,Context context){

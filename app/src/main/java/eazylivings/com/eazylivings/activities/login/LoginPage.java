@@ -1,26 +1,25 @@
 package eazylivings.com.eazylivings.activities.login;
 
 import android.app.Activity;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.v7.app.AlertDialog;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.EditText;
 
 import eazylivings.com.eazylivings.R;
+import eazylivings.com.eazylivings.activities.MainActivity;
 import eazylivings.com.eazylivings.activities.WelcomeScreen;
 import eazylivings.com.eazylivings.firsttimeinstallation.DBCreation;
 import eazylivings.com.eazylivings.sessionmanagement.Session;
 import eazylivings.com.eazylivings.validators.ValidateInputs;
 
-public class LoginPage extends Activity {
+public class LoginPage extends AppCompatActivity {
 
     private String userName;
     DBCreation dbCreation;
-    AlertDialog alertDialog;
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -34,10 +33,11 @@ public class LoginPage extends Activity {
         if(editText_userName!=null && editText_password!=null){
 
             boolean isAccountAuthenticated= ValidateInputs.checkLogInDetails(editText_userName,editText_password,getApplicationContext());
-            boolean isUserOnline=ValidateInputs.isInternetAvailable();
+            boolean isUserOnline=ValidateInputs.isInternetAvailable(getApplicationContext());
             if(isAccountAuthenticated && isUserOnline){
 
-                setupUserProfile();
+                //setupUserProfile();
+                setSession();
                 Intent intent = new Intent(this, WelcomeScreen.class);
                 startActivity(intent);
 
@@ -54,7 +54,7 @@ public class LoginPage extends Activity {
 
     public void onClickRegisterButton(View view) {
 
-        if(ValidateInputs.isInternetAvailable()) {
+        if(ValidateInputs.isInternetAvailable(getApplicationContext())) {
 
             Intent intent = new Intent(this, RegisterNewUser.class);
             startActivity(intent);
@@ -66,7 +66,7 @@ public class LoginPage extends Activity {
 
     public void onClickForgotPassword(View view) {
 
-        if(ValidateInputs.isInternetAvailable()) {
+        if(ValidateInputs.isInternetAvailable(getApplicationContext())) {
 
             Intent intent = new Intent(this, ForgotPassword.class);
             startActivity(intent);
@@ -95,7 +95,15 @@ public class LoginPage extends Activity {
     }
 
     private void generatePopupMessage(String message){
+        AlertDialog alertDialog = new AlertDialog.Builder(LoginPage.this).create();
+        alertDialog.setTitle("Alert");
         alertDialog.setMessage(message);
+        alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                });
         alertDialog.show();
     }
 }

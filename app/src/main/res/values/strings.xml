@@ -11,4 +11,16 @@
     <string name="contact_number">Contact Number</string>
     <string name="address">Address</string>
     <string name="title_activity_over_flow">OverFlow</string>
+
+    <string name="hello">MainActivity</string>
+
+    <string name="phone">Phone</string>
+    <string name="computer">Computer</string>
+    <string name="gamepad">Gamepad</string>
+
+    <string name="camera">Camera</string>
+    <string name="video">Video</string>
+
+    <string name="email">EMail</string>
+
 </resources>

@@ -20,18 +20,14 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".activities.login.RegisterNewUser"
-            android:theme="@android:style/Theme.Translucent.NoTitleBar.Fullscreen"/>
-        <activity android:name=".activities.login.ForgotPassword"
-            android:theme="@android:style/Theme.Translucent.NoTitleBar.Fullscreen"/>
-        <activity android:name=".activities.login.LoginPage"
-            android:theme="@android:style/Theme.Translucent.NoTitleBar.Fullscreen"/>
-        <activity android:name=".activities.UserProfile"
-            android:theme="@android:style/Theme.Translucent.NoTitleBar.Fullscreen"/>
-        <activity android:name=".activities.Introduction"
-            android:theme="@android:style/Theme.Translucent.NoTitleBar.Fullscreen"/>
+        <activity android:name=".activities.login.RegisterNewUser"/>
+        <activity android:name=".activities.login.ForgotPassword"/>
+        <activity android:name=".activities.login.LoginPage" />
+        <activity android:name=".activities.UserProfile"/>
+        <activity android:name=".activities.Introduction"/>
         <activity android:name=".activities.WelcomeScreen"
-            android:theme="@android:style/Theme.Translucent.NoTitleBar.Fullscreen"/>
+           android:uiOptions="splitActionBarWhenNarrow"
+            />
     </application>
 
 </manifest>

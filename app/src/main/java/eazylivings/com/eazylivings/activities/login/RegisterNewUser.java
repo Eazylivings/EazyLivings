@@ -2,6 +2,7 @@ package eazylivings.com.eazylivings.activities.login;
 
 import android.app.Activity;
 import android.content.ContentValues;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.os.Looper;
 import android.support.v7.app.AlertDialog;
@@ -17,7 +18,7 @@ import eazylivings.com.eazylivings.firsttimeinstallation.DBCreation;
 import eazylivings.com.eazylivings.sessionmanagement.Session;
 import eazylivings.com.eazylivings.validators.ValidateInputs;
 
-public class RegisterNewUser extends Activity {
+public class RegisterNewUser extends AppCompatActivity {
 
     DBCreation dbCreation;
     AlertDialog alertDialog;
@@ -93,6 +94,17 @@ public class RegisterNewUser extends Activity {
     }
 
     private void generatePopupMessages(String message){
-        alertDialog.setMessage(message);
+        {
+            AlertDialog alertDialog = new AlertDialog.Builder(RegisterNewUser.this).create();
+            alertDialog.setTitle("Alert");
+            alertDialog.setMessage(message);
+            alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
+                    new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.dismiss();
+                        }
+                    });
+            alertDialog.show();
+        }
     }
 }

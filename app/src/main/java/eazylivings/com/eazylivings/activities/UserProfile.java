@@ -7,7 +7,7 @@ import android.view.View;
 
 import eazylivings.com.eazylivings.R;
 
-public class UserProfile extends Activity {
+public class UserProfile extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

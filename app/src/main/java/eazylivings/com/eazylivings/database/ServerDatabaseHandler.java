@@ -66,8 +66,8 @@ public class ServerDatabaseHandler extends AsyncTask<String,Void,String>  {
                 bufferedReader.close();
                 inputStream.close();
                 httpUrlConnection.disconnect();
-                SharedPreferences preferences= PreferenceManager.getDefaultSharedPreferences(context);
-                preferences.edit().putString("result",result).commit();
+
+                setSharedPreferences(result);
                 return result;
             } catch (MalformedURLException e) {
                 String connectError="Please Check Network Connection";
@@ -142,8 +142,8 @@ public class ServerDatabaseHandler extends AsyncTask<String,Void,String>  {
 
     @Override
     protected void onPostExecute(String result) {
-        alertDialog.setMessage(result);
-        alertDialog.show();
+        //alertDialog.setMessage(result);
+        //alertDialog.show();
     }
 
     @Override
@@ -161,6 +161,18 @@ public class ServerDatabaseHandler extends AsyncTask<String,Void,String>  {
         String password="";
 
         return password;
+    }
+
+    private void setSharedPreferences(String result){
+
+
+        SharedPreferences preferences= PreferenceManager.getDefaultSharedPreferences(context);
+        if(preferences!=null) {
+            preferences.edit().remove("result");
+            preferences.edit().commit();
+            preferences.edit().putString("result", result).commit();
+        }
+
     }
 }
 
