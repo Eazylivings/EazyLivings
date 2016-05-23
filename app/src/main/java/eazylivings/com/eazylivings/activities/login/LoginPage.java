@@ -7,6 +7,7 @@ import android.preference.PreferenceManager;
 import android.support.v7.app.AlertDialog;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 
@@ -29,30 +30,32 @@ public class LoginPage extends AppCompatActivity {
         EditText editText_userName = (EditText) findViewById(R.id.loginPage_editText_userName);
         EditText editText_password = (EditText) findViewById(R.id.loginPage_editText_password);
 
-        if(editText_userName!=null && editText_password!=null){
+        if(editText_userName!=null && editText_password!=null) {
+            if (editText_userName.getText().toString().equalsIgnoreCase("")) {
+                generatePopupMessage("Please enter username");
+            } else if (editText_password.getText().toString().equalsIgnoreCase("")) {
+                generatePopupMessage("Please enter password");
+            } else {
 
+                boolean isUserOnline = ValidateInputs.isInternetAvailable(getApplicationContext());
+                if (isUserOnline) {
 
+                    String accountAuthenticationString = ValidateInputs.checkLogInDetails(editText_userName, editText_password, getApplicationContext());
+                    if (accountAuthenticationString.equalsIgnoreCase("true")) {
+                        userName = editText_userName.getText().toString();
+                        //setupUserProfile();
+                        setSession();
+                        Intent intent = new Intent(this, WelcomeScreen.class);
+                        startActivity(intent);
+                    } else {
+                        generatePopupMessage("Please check login details and try again");
+                    }
 
-            boolean isUserOnline=ValidateInputs.isInternetAvailable(getApplicationContext());
-            if(isUserOnline){
-                boolean isAccountAuthenticated= ValidateInputs.checkLogInDetails(editText_userName,editText_password,getApplicationContext());
-                if(isAccountAuthenticated){
-
-                    userName=editText_userName.getText().toString();
-                    //setupUserProfile();
-                    setSession();
-                    Intent intent = new Intent(this, WelcomeScreen.class);
-                    startActivity(intent);
-
-                }else
-                {
-                    generatePopupMessage("Please check login details and try again");
+                } else {
+                    generatePopupMessage("Please check internet connection.");
                 }
 
-            }else{
-                generatePopupMessage("Please check internet connection.");
             }
-
         }
     }
 

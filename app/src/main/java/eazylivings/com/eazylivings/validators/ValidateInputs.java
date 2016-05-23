@@ -1,14 +1,14 @@
 package eazylivings.com.eazylivings.validators;
 
 import android.content.Context;
-import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
-import android.preference.PreferenceManager;
+import android.util.Log;
 import android.widget.EditText;
 
 import eazylivings.com.eazylivings.constants.Constants;
 import eazylivings.com.eazylivings.database.ServerDatabaseHandler;
+import eazylivings.com.eazylivings.sharedpreference.SharedPreference;
 
 
 public class ValidateInputs {
@@ -82,28 +82,25 @@ public class ValidateInputs {
                 (ConnectivityManager)context.getSystemService(Context.CONNECTIVITY_SERVICE);
 
         NetworkInfo activeNetwork = cm.getActiveNetworkInfo();
-        boolean isConnected = activeNetwork != null &&
-                activeNetwork.isConnectedOrConnecting();
 
         return  activeNetwork.getType() == ConnectivityManager.TYPE_WIFI;
     }
 
-    public static boolean checkLogInDetails(EditText userName, EditText password,Context context){
+    public static String checkLogInDetails(EditText userName, EditText password,Context context){
 
-       ServerDatabaseHandler serverDatabaseHandler=new ServerDatabaseHandler(context);
+        String result="";
+        SharedPreference sharedPreference=new SharedPreference();
+
+        sharedPreference.clearSharedPreference(context);
+        Log.i("12","Already present Preference Result "+sharedPreference.getStringValueFromSharedPreference(context,"result"));
+        ServerDatabaseHandler serverDatabaseHandler=new ServerDatabaseHandler(context);
         try{
             serverDatabaseHandler.execute(Constants.LOGIN,userName.getText().toString(),password.getText().toString());
+            result=sharedPreference.getStringValueFromSharedPreference(context,"result");
+
+            Log.i("12","Final Result after execution "+ result);
         }catch(Exception e){
-
         }
-        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
-
-        String result= prefs.getString("result","result");
-
-        if(result.equalsIgnoreCase("Login Successful!!! Welcome")){
-            return true;
-        }else{
-            return false;
-        }
+       return result;
     }
 }

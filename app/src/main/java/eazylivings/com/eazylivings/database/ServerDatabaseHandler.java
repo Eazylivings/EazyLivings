@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.preference.PreferenceManager;
+import android.util.Log;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -17,6 +18,8 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLEncoder;
+
+import eazylivings.com.eazylivings.sharedpreference.SharedPreference;
 
 public class ServerDatabaseHandler extends AsyncTask<String,Void,String>  {
 
@@ -35,6 +38,7 @@ public class ServerDatabaseHandler extends AsyncTask<String,Void,String>  {
         String loginUrl = "http://eazylivings.com/login.php";
         if (type.equals("login")) {
             try {
+
                 URL url = new URL(loginUrl);
                 HttpURLConnection httpUrlConnection = (HttpURLConnection) url.openConnection();
                 httpUrlConnection.setRequestMethod("POST");
@@ -51,12 +55,11 @@ public class ServerDatabaseHandler extends AsyncTask<String,Void,String>  {
                 bufferedWriter.flush();
                 bufferedWriter.close();
                 outputStream.close();
-
                 InputStream inputStream = httpUrlConnection.getInputStream();
                 BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream, "iso-8859-1"));
 
                 String line = "";
-
+                result="";
                 while ((line = bufferedReader.readLine()) != null) {
                     result += line;
                 }
@@ -64,16 +67,16 @@ public class ServerDatabaseHandler extends AsyncTask<String,Void,String>  {
                 bufferedReader.close();
                 inputStream.close();
                 httpUrlConnection.disconnect();
-
                 setSharedPreferences(result);
+                Log.i("12","Server Result "+result);
                 return result;
             } catch (MalformedURLException e) {
-                String connectError="Please Check Network Connection";
-                alertDialog.setMessage(connectError);
-                alertDialog.show();
-                e.printStackTrace();
+                result="Exception Occurred";
+
             } catch (IOException e) {
-                e.printStackTrace();
+                result="Exception Occurred";
+            }catch(Exception e){
+                result="Exception Occurred";
             }
 
 
@@ -87,7 +90,9 @@ public class ServerDatabaseHandler extends AsyncTask<String,Void,String>  {
                     httpUrlConnection.setRequestMethod("POST");
                     httpUrlConnection.setDoOutput(true);
                     httpUrlConnection.setDoInput(true);
+
                     OutputStream outputStream = httpUrlConnection.getOutputStream();
+
                     BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(outputStream, "UTF-8"));
 
                     String user_name = params[1];
@@ -117,16 +122,12 @@ public class ServerDatabaseHandler extends AsyncTask<String,Void,String>  {
 
                     return result;
                 } catch (MalformedURLException e) {
-                    String connectError="Please Check Network Connection";
-                    alertDialog.setMessage(connectError);
-                    alertDialog.show();
-                    e.printStackTrace();
+                    result="Exception Occurred";
                 } catch (IOException e) {
-                    e.printStackTrace();
+                    result="Exception Occurred";
+                }catch (Exception e){
+                    result="Exception Occurred";
                 }
-
-
-
             }
         }
         return result;
@@ -134,14 +135,13 @@ public class ServerDatabaseHandler extends AsyncTask<String,Void,String>  {
 
     @Override
     protected void onPreExecute() {
-        alertDialog=new AlertDialog.Builder(context).create();
-        alertDialog.setTitle("Login Status");
+
     }
 
     @Override
     protected void onPostExecute(String result) {
-        //alertDialog.setMessage(result);
-        //alertDialog.show();
+        SharedPreference sharedPreference=new SharedPreference();
+        Log.i("12","Result in post execute - "+sharedPreference.getStringValueFromSharedPreference(context,"result"));
     }
 
     @Override
@@ -164,13 +164,12 @@ public class ServerDatabaseHandler extends AsyncTask<String,Void,String>  {
     private void setSharedPreferences(String result){
 
 
-        SharedPreferences preferences= PreferenceManager.getDefaultSharedPreferences(context);
-        if(preferences!=null) {
-            preferences.edit().remove("result");
-            preferences.edit().commit();
-            preferences.edit().putString("result", result).commit();
-        }
+        SharedPreference sharedPreference=new SharedPreference();
+        sharedPreference.setStringValueInSharedPreference(context,"result",result);
+        Log.i("12","Result setted into preference "+result);
 
+        String testString=sharedPreference.getStringValueFromSharedPreference(context,"result");
+        Log.i("12","Result into the preference during setting "+testString);
     }
 }
 
