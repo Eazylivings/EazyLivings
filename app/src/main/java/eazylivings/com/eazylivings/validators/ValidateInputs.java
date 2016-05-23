@@ -3,7 +3,6 @@ package eazylivings.com.eazylivings.validators;
 import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
-import android.util.Log;
 import android.widget.EditText;
 
 import eazylivings.com.eazylivings.constants.Constants;
@@ -92,17 +91,14 @@ public class ValidateInputs {
         SharedPreference sharedPreference=new SharedPreference();
 
         sharedPreference.clearSharedPreference(context);
-        Log.i("12","Already present Preference Result "+sharedPreference.getStringValueFromSharedPreference(context,"result"));
         ServerDatabaseHandler serverDatabaseHandler=new ServerDatabaseHandler(context);
         try{
             serverDatabaseHandler.execute(Constants.LOGIN,userName.getText().toString(),password.getText().toString());
             result=sharedPreference.getStringValueFromSharedPreference(context,"result");
 
-            Log.i("12","Final Result after execution "+ result);
             while(result.equalsIgnoreCase("empty")){
                 result=sharedPreference.getStringValueFromSharedPreference(context,"result");
             }
-            Log.i("12","Final Result after while loop "+ result);
         }catch(Exception e){
         }
        return result;

@@ -8,6 +8,7 @@ import android.preference.PreferenceManager;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 
 import eazylivings.com.eazylivings.R;
@@ -21,35 +22,84 @@ public class RegisterNewUser extends AppCompatActivity {
 
     DBCreation dbCreation;
     AlertDialog alertDialog;
+    Button backButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register_new_user);
+        backButton = (Button)findViewById(R.id.newUser_button_backToLogin);
+        backButtonListener(backButton);
+
     }
 
-    public void registerNewUser(View view){
+    public void onClickRegisterNewUser(View view) {
 
-        EditText userName=(EditText)findViewById(R.id.newUser_text_userName);
-        EditText emailAddress=(EditText)findViewById(R.id.newUser_text_email);
-        EditText password=(EditText)findViewById(R.id.newUser_text_password);
-        EditText contactNo=(EditText)findViewById(R.id.newUser_text_contactNo);
+        final EditText userName = (EditText) findViewById(R.id.newUser_text_userName);
+        final EditText emailAddress = (EditText) findViewById(R.id.newUser_text_email);
+        final EditText password = (EditText) findViewById(R.id.newUser_text_password);
+        final EditText contactNumber = (EditText) findViewById(R.id.newUser_text_contactNumber);
+
+        /*if (userName != null){
+            userName.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+                @Override
+                public void onFocusChange(View v, boolean hasFocus) {
+                    if (!hasFocus){
+                        if(!ValidateInputs.checkUsernameFormat(userName)){
+                            generatePopupMessages("Please check username.");
+                        }
+                    }
+                }
+            });
+    }
+        if (emailAddress != null){
+            emailAddress.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+                @Override
+                public void onFocusChange(View v, boolean hasFocus) {
+                    if (!hasFocus){
+                        if(!ValidateInputs.checkEmailFormat(emailAddress)){
+                            generatePopupMessages("Please provide correct email address.");
+                        }
+                    }
+                }
+            });
+        }
+        if (contactNumber != null){
+            contactNumber.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+                @Override
+                public void onFocusChange(View v, boolean hasFocus) {
+                    if (!hasFocus){
+                        if(!ValidateInputs.checkPasswordFormat(contactNumber)){
+                            generatePopupMessages("Please provide correct password.");
+                        }
+                    }
+                }
+            });
+        }
+        if (password != null){
+            password.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+                @Override
+                public void onFocusChange(View v, boolean hasFocus) {
+                    if (!hasFocus){
+                        if(!ValidateInputs.checkPasswordFormat(password)){
+                            generatePopupMessages("Please provide correct password.");
+                        }
+                    }
+                }
+            });
+        }*/
 
         boolean isEmailFormatCorrect=ValidateInputs.checkEmailFormat(emailAddress);
         boolean isUserAlreadyPresent=ValidateInputs.checkExistingUser(userName,getApplicationContext());
         boolean isUserNameFormatCorrect=ValidateInputs.checkUsernameFormat(userName);
         boolean isPasswordFormatCorrect=ValidateInputs.checkPasswordFormat(password);
 
-        ServerDatabaseHandler serverDatabaseHandler=new ServerDatabaseHandler(getApplicationContext());
-        if(userName!=null && password!=null && emailAddress!=null&&contactNo!=null) {
-            Looper.prepare();
-            serverDatabaseHandler.execute("register", userName.toString(), password.toString(), emailAddress.toString(), contactNo.toString());
+        //if(userName!=null && password!=null && emailAddress!=null && contactNumber!=null) {
 
-        }
+            ServerDatabaseHandler serverDatabaseHandler=new ServerDatabaseHandler(getBaseContext());
+            serverDatabaseHandler.execute("register", "gfdgfdg", "dgfdgd", "dgdfgfd","dgfdgfdg");
 
-
-
-
+       // }
 
         if(isUserNameFormatCorrect && isEmailFormatCorrect && !isUserAlreadyPresent && isPasswordFormatCorrect){
 
@@ -69,27 +119,6 @@ public class RegisterNewUser extends AppCompatActivity {
             prefs.edit().putString("userName", userName.getText().toString()).apply();
 
 
-        }else{
-
-            if(!isUserAlreadyPresent){
-
-                generatePopupMessages("This Username is already taken. Please choose different username.");
-
-            }else if(!isUserNameFormatCorrect){
-
-                generatePopupMessages("Please check username. It should contains Une number.");
-
-            }else if(!isEmailFormatCorrect){
-
-                generatePopupMessages("Please provide correct email address");
-
-            }else if(!isPasswordFormatCorrect){
-
-                generatePopupMessages("Password should adhere to password policies.");
-
-            }else{
-                generatePopupMessages("Confirm password should be same as password.");
-            }
         }
     }
 
@@ -107,4 +136,17 @@ public class RegisterNewUser extends AppCompatActivity {
             alertDialog.show();
         }
     }
+    private void backButtonListener(Button backButton){
+
+        if (backButton != null) {
+            backButton.setOnClickListener(new Button.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    finish();
+                }
+            });
+        }
+
+    }
+
 }

@@ -4,9 +4,6 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
-import android.preference.PreferenceManager;
-import android.util.Log;
-
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.IOException;
@@ -24,7 +21,6 @@ import eazylivings.com.eazylivings.sharedpreference.SharedPreference;
 public class ServerDatabaseHandler extends AsyncTask<String,Void,String>  {
 
     Context context;
-    AlertDialog alertDialog;
     static String result="";
 
     public ServerDatabaseHandler(Context ctx){
@@ -68,7 +64,6 @@ public class ServerDatabaseHandler extends AsyncTask<String,Void,String>  {
                 inputStream.close();
                 httpUrlConnection.disconnect();
                 setSharedPreferences(result);
-                Log.i("12","Server Result "+result);
                 return result;
             } catch (MalformedURLException e) {
                 result="Exception Occurred";
@@ -140,8 +135,7 @@ public class ServerDatabaseHandler extends AsyncTask<String,Void,String>  {
 
     @Override
     protected void onPostExecute(String result) {
-        SharedPreference sharedPreference=new SharedPreference();
-        Log.i("12","Result in post execute - "+sharedPreference.getStringValueFromSharedPreference(context,"result"));
+
     }
 
     @Override
@@ -166,10 +160,8 @@ public class ServerDatabaseHandler extends AsyncTask<String,Void,String>  {
 
         SharedPreference sharedPreference=new SharedPreference();
         sharedPreference.setStringValueInSharedPreference(context,"result",result);
-        Log.i("12","Result setted into preference "+result);
 
         String testString=sharedPreference.getStringValueFromSharedPreference(context,"result");
-        Log.i("12","Result into the preference during setting "+testString);
     }
 }
 
