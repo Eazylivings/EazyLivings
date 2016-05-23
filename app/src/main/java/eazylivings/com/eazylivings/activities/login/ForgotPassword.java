@@ -69,8 +69,9 @@ public class ForgotPassword extends AppCompatActivity {
     private boolean sendEmailForPasswordRetrieval(EditText emailAddress){
 
         MailHandler mailHandler=new MailHandler(getApplicationContext());
-        mailHandler.execute("send email",Constants.FORGOTPASSWORD,emailAddress.getText().toString());
-
+        if(emailAddress!=null) {
+            mailHandler.execute("send email", Constants.FORGOTPASSWORD, emailAddress.getText().toString());
+        }
         String activityResult="";
 
         return activityResult.equalsIgnoreCase("Email successfully sent");
