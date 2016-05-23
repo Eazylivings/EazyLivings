@@ -99,6 +99,10 @@ public class ValidateInputs {
             result=sharedPreference.getStringValueFromSharedPreference(context,"result");
 
             Log.i("12","Final Result after execution "+ result);
+            while(result.equalsIgnoreCase("empty")){
+                result=sharedPreference.getStringValueFromSharedPreference(context,"result");
+            }
+            Log.i("12","Final Result after while loop "+ result);
         }catch(Exception e){
         }
        return result;
