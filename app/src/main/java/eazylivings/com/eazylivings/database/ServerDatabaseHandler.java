@@ -1,12 +1,12 @@
 package eazylivings.com.eazylivings.database;
 
+import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.preference.PreferenceManager;
-import android.support.v7.app.AlertDialog;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -22,7 +22,6 @@ import java.net.URLEncoder;
 
 import eazylivings.com.eazylivings.VO.UserDetails;
 import eazylivings.com.eazylivings.activities.WelcomeScreen;
-import eazylivings.com.eazylivings.activities.login.LoginPage;
 import eazylivings.com.eazylivings.constants.Constants;
 import eazylivings.com.eazylivings.firsttimeinstallation.DBCreation;
 import eazylivings.com.eazylivings.sharedpreference.SharedPreference;
@@ -33,7 +32,6 @@ public class ServerDatabaseHandler extends AsyncTask<String,Void,String>  {
     static String result="";
     static String currentAction="";
     String userName="";
-
     UserDetails userDetails=new UserDetails();
 
     public ServerDatabaseHandler(Context ctx){
@@ -123,7 +121,7 @@ public class ServerDatabaseHandler extends AsyncTask<String,Void,String>  {
 
             setSharedPreferences("userName",userName);
             Intent intent = new Intent(context,WelcomeScreen.class);
-            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_MULTIPLE_TASK);
+            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             context.startActivity(intent);
 
         } else if(accountAuthenticationString.equalsIgnoreCase("Login Failed")) {
@@ -133,11 +131,10 @@ public class ServerDatabaseHandler extends AsyncTask<String,Void,String>  {
             DBCreation dbCreation;
             dbCreation=new DBCreation(context,Constants.DATABASE_NAME,null,Constants.DATABASE_VERSION);
             dbCreation.insertServicesIntoTable();
-            dbCreation.insertUserDetails(userDetails);
             dbCreation.createUserSpecificTables(userName);
-            SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
-            prefs.edit().putBoolean("loginStatus", true).apply();
-            prefs.edit().putString("userName","").apply();
+            dbCreation.insertUserDetails(userDetails);
+
+            setSharedPreferences("userName",userName);
 
         }else if(result.equalsIgnoreCase("Registration Failed")){
             generatePopupMessage("Failed to register. Please try again with correct inputs");
@@ -167,9 +164,8 @@ public class ServerDatabaseHandler extends AsyncTask<String,Void,String>  {
     }
 
     private void generatePopupMessage(String message){
-
-        AlertDialog alertDialog = new AlertDialog.Builder(context).create();
-        alertDialog.setTitle("Alert");
+        AlertDialog alertDialog = new AlertDialog.Builder(context).create(); //Use context
+        alertDialog.setTitle("Warning");
         alertDialog.setMessage(message);
         alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
                 new DialogInterface.OnClickListener() {
@@ -179,8 +175,7 @@ public class ServerDatabaseHandler extends AsyncTask<String,Void,String>  {
                 });
         alertDialog.show();
 
+
     }
-
-
 }
 

@@ -56,7 +56,6 @@ public class DBCreation  extends SQLiteOpenHelper {
             db.insert(Constants.USER_PREFERENCES_TABLE,null,values);
 
         }
-
         db.close();
     }
 
@@ -98,15 +97,18 @@ public class DBCreation  extends SQLiteOpenHelper {
 
     //At time of registration, users details like username, email address and password will be stored here. Phone number can also be captured
     public void insertUserDetails(UserDetails userDetails){
-
-        ContentValues values=new ContentValues();
-        values.put(Constants.COLUMN_FIRST_NAME,userDetails.getUserName());
-        values.put(Constants.COLUMN_EMAIL_ADDRESS,userDetails.getEmail_address());
-        values.put(Constants.COLUMN_CONTACT_NUMBER,userDetails.getContact_number());
-        values.put(Constants.COLUMN_PASSWORD,userDetails.getPassword());
-
-        db=getWritableDatabase();
-        db.insert(Constants.USER_DETAILS_TABLE,null,values);
+    if(userDetails!=null){
+            ContentValues values=new ContentValues();
+            values.put(Constants.COLUMN_USER_NAME,userDetails.getUserName());
+            values.put(Constants.COLUMN_PASSWORD,userDetails.getPassword());
+            values.put(Constants.COLUMN_EMAIL_ADDRESS,userDetails.getEmail_address());
+            values.put(Constants.COLUMN_CONTACT_NUMBER,userDetails.getContact_number());
+            if(db!=null) {
+                db = getWritableDatabase();
+                db.insert("user_details_" + userDetails.getUserName(), null, values);
+                db.close();
+            }
+        }
     }
 
     private ArrayList<String> populateListOfServices(){

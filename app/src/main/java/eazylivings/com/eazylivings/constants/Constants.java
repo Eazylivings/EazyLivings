@@ -10,8 +10,7 @@ public class Constants {
     //Sign Up details Table and Columns Names
     public final static String SIGNUP_DETAILS_TABLE="sign_up_details";
 
-    public final static String COLUMN_FIRST_NAME="firstname";
-    public final static String COLUMN_LAST_NAME="lastname";
+    public final static String COLUMN_USER_NAME="firstname";
     public final static String COLUMN_EMAIL_ADDRESS="emailaddress";
     public final static String COLUMN_CONTACT_NUMBER="contactNumber";
     public final static String COLUMN_PASSWORD="password";
