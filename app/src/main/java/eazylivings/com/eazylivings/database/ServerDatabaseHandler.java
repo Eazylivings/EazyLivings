@@ -125,7 +125,7 @@ public class ServerDatabaseHandler extends AsyncTask<String,Void,String>  {
     @Override
     protected void onPostExecute(String accountAuthenticationString) {
         ProgressBar progressBar=(ProgressBar)activity.findViewById(R.id.loginPage_progressBar_progress);
-        progressBar.setVisibility(View.VISIBLE);
+        progressBar.setVisibility(View.INVISIBLE);
 
         if (accountAuthenticationString.equalsIgnoreCase("Login Success")) {
 
