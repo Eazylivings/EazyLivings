@@ -3,7 +3,6 @@ package eazylivings.com.eazylivings.activities.login;
 import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.os.Looper;
 import android.preference.PreferenceManager;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -21,7 +20,6 @@ import eazylivings.com.eazylivings.validators.ValidateInputs;
 public class RegisterNewUser extends AppCompatActivity {
 
     DBCreation dbCreation;
-    AlertDialog alertDialog;
     Button backButton;
 
     @Override
@@ -36,89 +34,38 @@ public class RegisterNewUser extends AppCompatActivity {
     public void onClickRegisterNewUser(View view) {
 
         final EditText userName = (EditText) findViewById(R.id.newUser_text_userName);
-        final EditText emailAddress = (EditText) findViewById(R.id.newUser_text_email);
         final EditText password = (EditText) findViewById(R.id.newUser_text_password);
+        final EditText emailAddress = (EditText) findViewById(R.id.newUser_text_email);
         final EditText contactNumber = (EditText) findViewById(R.id.newUser_text_contactNumber);
-
-        /*if (userName != null){
-            userName.setOnFocusChangeListener(new View.OnFocusChangeListener() {
-                @Override
-                public void onFocusChange(View v, boolean hasFocus) {
-                    if (!hasFocus){
-                        if(!ValidateInputs.checkUsernameFormat(userName)){
-                            generatePopupMessages("Please check username.");
-                        }
-                    }
-                }
-            });
-    }
-        if (emailAddress != null){
-            emailAddress.setOnFocusChangeListener(new View.OnFocusChangeListener() {
-                @Override
-                public void onFocusChange(View v, boolean hasFocus) {
-                    if (!hasFocus){
-                        if(!ValidateInputs.checkEmailFormat(emailAddress)){
-                            generatePopupMessages("Please provide correct email address.");
-                        }
-                    }
-                }
-            });
-        }
-        if (contactNumber != null){
-            contactNumber.setOnFocusChangeListener(new View.OnFocusChangeListener() {
-                @Override
-                public void onFocusChange(View v, boolean hasFocus) {
-                    if (!hasFocus){
-                        if(!ValidateInputs.checkPasswordFormat(contactNumber)){
-                            generatePopupMessages("Please provide correct password.");
-                        }
-                    }
-                }
-            });
-        }
-        if (password != null){
-            password.setOnFocusChangeListener(new View.OnFocusChangeListener() {
-                @Override
-                public void onFocusChange(View v, boolean hasFocus) {
-                    if (!hasFocus){
-                        if(!ValidateInputs.checkPasswordFormat(password)){
-                            generatePopupMessages("Please provide correct password.");
-                        }
-                    }
-                }
-            });
-        }*/
 
         boolean isEmailFormatCorrect=ValidateInputs.checkEmailFormat(emailAddress);
         boolean isUserAlreadyPresent=ValidateInputs.checkExistingUser(userName,getApplicationContext());
         boolean isUserNameFormatCorrect=ValidateInputs.checkUsernameFormat(userName);
         boolean isPasswordFormatCorrect=ValidateInputs.checkPasswordFormat(password);
+        boolean isContactNumberCorrect=ValidateInputs.checkContactNumber(contactNumber);
 
-        //if(userName!=null && password!=null && emailAddress!=null && contactNumber!=null) {
+        if(isUserNameFormatCorrect && isEmailFormatCorrect && !isUserAlreadyPresent && isPasswordFormatCorrect && isContactNumberCorrect){
 
-            ServerDatabaseHandler serverDatabaseHandler=new ServerDatabaseHandler(getBaseContext());
-            serverDatabaseHandler.execute("register", "gfdgfdg", "dgfdgd", "dgdfgfd","dgfdgfdg");
-
-       // }
-
-        if(isUserNameFormatCorrect && isEmailFormatCorrect && !isUserAlreadyPresent && isPasswordFormatCorrect){
 
             UserDetails userDetails=new UserDetails();
-            dbCreation=new DBCreation(this,Constants.DATABASE_NAME,null,Constants.DATABASE_VERSION);
+            userDetails.setUserName(userName.getText().toString());
+            userDetails.setPassword(password.getText().toString());
+            userDetails.setEmail_address(emailAddress.getText().toString());
+            userDetails.setContact_number(contactNumber.getText().toString());
 
-            userDetails.setFirst_name("");
-            userDetails.setEmail_address("");
-            userDetails.setContact_number("");
-            userDetails.setPassword("");
+            ServerDatabaseHandler serverDatabaseHandler=new ServerDatabaseHandler(getApplicationContext());
+            serverDatabaseHandler.execute(Constants.REGISTER,userName.getText().toString(),password.getText().toString(),emailAddress.getText().toString(),contactNumber.getText().toString());
 
-            dbCreation.insertServicesIntoTable();
-            dbCreation.insertUserDetails(userDetails);
-            dbCreation.createUserSpecificTables(userName.getText().toString());
-            SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
-            prefs.edit().putBoolean("loginStatus", true).apply();
-            prefs.edit().putString("userName", userName.getText().toString()).apply();
-
-
+        }else if(isUserAlreadyPresent){
+            generatePopupMessages("This user is already present. Please sign in.");
+        }else if(!isUserNameFormatCorrect){
+            generatePopupMessages("Please check username");
+        }else if(isEmailFormatCorrect){
+            generatePopupMessages("Please provide correct email address");
+        }else if(isPasswordFormatCorrect){
+            generatePopupMessages("Please choose correct password");
+        }else if(isContactNumberCorrect){
+            generatePopupMessages("Please provide correct contact number.");
         }
     }
 

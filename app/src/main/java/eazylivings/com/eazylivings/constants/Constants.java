@@ -20,6 +20,10 @@ public class Constants {
     public final static String USER_PREFERENCES_TABLE="user_preferences";
 
     public final static String LOGIN="login";
+    public final static String REGISTER="register";
+    public final static String LOGIN_URL="http://eazylivings.com/login.php";
+    public final static String REGISTER_URL="http://eazylivings.com/register.php";
+
     public final static String FORGOTPASSWORD="forgotPassword";
 
     public final static String MESSAGE_FOR_SUCCESSFUL_RESET_PASSWORD ="An Email has been sent to your registered email address.Please login with the One time password in the mails."+

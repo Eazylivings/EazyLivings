@@ -1,31 +1,20 @@
 package eazylivings.com.eazylivings.VO;
 
-/**
- * Created by shweagar on 5/21/2016.
- */
+
 public class UserDetails {
 
-    String first_name;
-    String last_name;
+    String userName;
     String email_address;
     String password;
     String residential_address;
     String contact_number;
 
-    public String getFirst_name() {
-        return first_name;
+    public String getUserName() {
+        return userName;
     }
 
-    public void setFirst_name(String first_name) {
-        this.first_name = first_name;
-    }
-
-    public String getLast_name() {
-        return last_name;
-    }
-
-    public void setLast_name(String last_name) {
-        this.last_name = last_name;
+    public void setUserName(String userName) {
+        this.userName = userName;
     }
 
     public String getEmail_address() {

@@ -5,6 +5,7 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.widget.EditText;
 
+import eazylivings.com.eazylivings.VO.UserDetails;
 import eazylivings.com.eazylivings.constants.Constants;
 import eazylivings.com.eazylivings.database.ServerDatabaseHandler;
 import eazylivings.com.eazylivings.sharedpreference.SharedPreference;
@@ -22,7 +23,6 @@ public class ValidateInputs {
         }
     }
 
-
     public static boolean checkEmailFormat(EditText emailAddress){
 
         if(emailAddress!=null) {
@@ -37,7 +37,7 @@ public class ValidateInputs {
 
         if(userName!=null ){
 
-            if(userName.getText().toString().matches("^[a-z0-9_-]{3,15}$")){
+            if(userName.getText().toString().matches("^[a-zA-Z]{3,15}$")){
                 return true;
             }else{
                 return false;
@@ -58,17 +58,17 @@ public class ValidateInputs {
         }
     }
 
+    public static boolean checkContactNumber(EditText contactNumber){
 
-    public static boolean checkExistingEmail(EditText emailAddress){
-
-        if(emailAddress!=null){
-
-            return true;
-
+        if(contactNumber!=null){
+            if(contactNumber.getText().toString().matches("\\+?\\d[\\d -]{8,12}\\d")){
+                return true;
+            }else{
+                return false;
+            }
         }else{
             return false;
         }
-
     }
 
     public static boolean isInternetAvailable(Context context) {
@@ -83,24 +83,5 @@ public class ValidateInputs {
         NetworkInfo activeNetwork = cm.getActiveNetworkInfo();
 
         return  activeNetwork.getType() == ConnectivityManager.TYPE_WIFI;
-    }
-
-    public static String checkLogInDetails(EditText userName, EditText password,Context context){
-
-        String result="";
-        SharedPreference sharedPreference=new SharedPreference();
-
-        sharedPreference.clearSharedPreference(context);
-        ServerDatabaseHandler serverDatabaseHandler=new ServerDatabaseHandler(context);
-        try{
-            serverDatabaseHandler.execute(Constants.LOGIN,userName.getText().toString(),password.getText().toString());
-            result=sharedPreference.getStringValueFromSharedPreference(context,"result");
-
-            while(result.equalsIgnoreCase("empty")){
-                result=sharedPreference.getStringValueFromSharedPreference(context,"result");
-            }
-        }catch(Exception e){
-        }
-       return result;
     }
 }

@@ -43,6 +43,12 @@ public class WelcomeScreen extends AppCompatActivity {
     }
 
     @Override
+    public void onBackPressed(){
+        finish();
+        System.exit(0);
+    }
+
+    @Override
     public boolean onOptionsItemSelected(MenuItem item) {
 
         Intent intent;

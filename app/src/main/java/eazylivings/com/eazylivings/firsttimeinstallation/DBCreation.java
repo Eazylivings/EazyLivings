@@ -9,7 +9,6 @@ import android.database.sqlite.SQLiteOpenHelper;
 import java.util.ArrayList;
 
 import eazylivings.com.eazylivings.VO.UserDetails;
-import eazylivings.com.eazylivings.activities.UserProfile;
 import eazylivings.com.eazylivings.constants.Constants;
 
 public class DBCreation  extends SQLiteOpenHelper {
@@ -101,8 +100,7 @@ public class DBCreation  extends SQLiteOpenHelper {
     public void insertUserDetails(UserDetails userDetails){
 
         ContentValues values=new ContentValues();
-        values.put(Constants.COLUMN_FIRST_NAME,userDetails.getFirst_name());
-        values.put(Constants.COLUMN_LAST_NAME,userDetails.getLast_name());
+        values.put(Constants.COLUMN_FIRST_NAME,userDetails.getUserName());
         values.put(Constants.COLUMN_EMAIL_ADDRESS,userDetails.getEmail_address());
         values.put(Constants.COLUMN_CONTACT_NUMBER,userDetails.getContact_number());
         values.put(Constants.COLUMN_PASSWORD,userDetails.getPassword());

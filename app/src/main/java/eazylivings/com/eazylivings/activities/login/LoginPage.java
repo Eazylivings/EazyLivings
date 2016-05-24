@@ -13,6 +13,8 @@ import android.widget.EditText;
 
 import eazylivings.com.eazylivings.R;
 import eazylivings.com.eazylivings.activities.WelcomeScreen;
+import eazylivings.com.eazylivings.constants.Constants;
+import eazylivings.com.eazylivings.database.ServerDatabaseHandler;
 import eazylivings.com.eazylivings.firsttimeinstallation.DBCreation;
 import eazylivings.com.eazylivings.validators.ValidateInputs;
 
@@ -39,22 +41,9 @@ public class LoginPage extends AppCompatActivity {
 
                 boolean isUserOnline = ValidateInputs.isInternetAvailable(getApplicationContext());
                 if (isUserOnline) {
-
-                    String accountAuthenticationString = ValidateInputs.checkLogInDetails(editText_userName, editText_password, getApplicationContext());
-                    if (accountAuthenticationString.equalsIgnoreCase("true")) {
-                        userName = editText_userName.getText().toString();
-                        //setupUserProfile();
-                        setSession();
-                        Intent intent = new Intent(this, WelcomeScreen.class);
-                        startActivity(intent);
-                    } else {
-                        generatePopupMessage("Please check login details and try again");
-                    }
-
-                } else {
-                    generatePopupMessage("Please check internet connection.");
+                    ServerDatabaseHandler serverDatabaseHandler=new ServerDatabaseHandler(getApplicationContext());
+                    serverDatabaseHandler.execute(Constants.LOGIN,editText_userName.getText().toString(),editText_password.getText().toString());
                 }
-
             }
         }
     }
