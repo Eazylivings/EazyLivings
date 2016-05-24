@@ -1,5 +1,6 @@
 package eazylivings.com.eazylivings.database;
 
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -33,9 +34,11 @@ public class ServerDatabaseHandler extends AsyncTask<String,Void,String>  {
     static String currentAction="";
     String userName="";
     UserDetails userDetails=new UserDetails();
+    Activity activity;
 
-    public ServerDatabaseHandler(Context ctx){
+    public ServerDatabaseHandler(Context ctx,Activity baseActivity){
         context=ctx;
+        this.activity=baseActivity;
     }
 
     @Override
@@ -164,7 +167,7 @@ public class ServerDatabaseHandler extends AsyncTask<String,Void,String>  {
     }
 
     private void generatePopupMessage(String message){
-        AlertDialog alertDialog = new AlertDialog.Builder(context).create(); //Use context
+        AlertDialog alertDialog = new AlertDialog.Builder(activity).create(); //Use context
         alertDialog.setTitle("Warning");
         alertDialog.setMessage(message);
         alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",

@@ -42,7 +42,7 @@ public class LoginPage extends AppCompatActivity {
 
                 boolean isUserOnline = ValidateInputs.isInternetAvailable(getApplicationContext());
                 if (isUserOnline) {
-                    ServerDatabaseHandler serverDatabaseHandler=new ServerDatabaseHandler(getApplicationContext());
+                    ServerDatabaseHandler serverDatabaseHandler=new ServerDatabaseHandler(getApplicationContext(),this);
                     serverDatabaseHandler.execute(Constants.LOGIN,editText_userName.getText().toString(),editText_password.getText().toString());
                 }
             }

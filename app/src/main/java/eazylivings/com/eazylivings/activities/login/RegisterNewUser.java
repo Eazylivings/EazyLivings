@@ -39,7 +39,7 @@ public class RegisterNewUser extends AppCompatActivity {
         final EditText contactNumber = (EditText) findViewById(R.id.newUser_text_contactNumber);
 
         boolean isEmailFormatCorrect=ValidateInputs.checkEmailFormat(emailAddress);
-        boolean isUserAlreadyPresent=ValidateInputs.checkExistingUser(userName,getApplicationContext());
+        boolean isUserAlreadyPresent=ValidateInputs.checkExistingUser(userName,getApplicationContext(),this);
         boolean isUserNameFormatCorrect=ValidateInputs.checkUsernameFormat(userName);
         boolean isPasswordFormatCorrect=ValidateInputs.checkPasswordFormat(password);
         boolean isContactNumberCorrect=ValidateInputs.checkContactNumber(contactNumber);
@@ -53,7 +53,7 @@ public class RegisterNewUser extends AppCompatActivity {
             userDetails.setEmail_address(emailAddress.getText().toString());
             userDetails.setContact_number(contactNumber.getText().toString());
 
-            ServerDatabaseHandler serverDatabaseHandler=new ServerDatabaseHandler(getApplicationContext());
+            ServerDatabaseHandler serverDatabaseHandler=new ServerDatabaseHandler(getApplicationContext(),this);
             serverDatabaseHandler.execute(Constants.REGISTER,userName.getText().toString(),password.getText().toString(),emailAddress.getText().toString(),contactNumber.getText().toString());
 
         }else if(isUserAlreadyPresent){

@@ -1,5 +1,6 @@
 package eazylivings.com.eazylivings.validators;
 
+import android.app.Activity;
 import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
@@ -47,9 +48,9 @@ public class ValidateInputs {
         }
     }
 
-    public static boolean checkExistingUser(EditText userName, Context context){
+    public static boolean checkExistingUser(EditText userName, Context context, Activity activity){
 
-        ServerDatabaseHandler serverDatabaseHandler=new ServerDatabaseHandler(context);
+        ServerDatabaseHandler serverDatabaseHandler=new ServerDatabaseHandler(context,activity);
         if(userName!=null){
             return serverDatabaseHandler.getExistingUser(userName.getText().toString());
         }else
