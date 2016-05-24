@@ -27,6 +27,8 @@ public class LoginPage extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login_page);
+        ProgressBar progressBar=(ProgressBar)findViewById(R.id.loginPage_progressBar_progress);
+        progressBar.setVisibility(View.INVISIBLE);
     }
 
     public void onClickLoginButton(View view) {

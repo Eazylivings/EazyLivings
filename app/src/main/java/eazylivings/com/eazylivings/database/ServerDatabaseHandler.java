@@ -8,6 +8,8 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.preference.PreferenceManager;
+import android.view.View;
+import android.widget.ProgressBar;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -21,6 +23,7 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLEncoder;
 
+import eazylivings.com.eazylivings.R;
 import eazylivings.com.eazylivings.VO.UserDetails;
 import eazylivings.com.eazylivings.activities.WelcomeScreen;
 import eazylivings.com.eazylivings.constants.Constants;
@@ -115,10 +118,14 @@ public class ServerDatabaseHandler extends AsyncTask<String,Void,String>  {
     @Override
     protected void onPreExecute() {
 
+        ProgressBar progressBar=(ProgressBar)activity.findViewById(R.id.loginPage_progressBar_progress);
+        progressBar.setVisibility(View.VISIBLE);
     }
 
     @Override
     protected void onPostExecute(String accountAuthenticationString) {
+        ProgressBar progressBar=(ProgressBar)activity.findViewById(R.id.loginPage_progressBar_progress);
+        progressBar.setVisibility(View.VISIBLE);
 
         if (accountAuthenticationString.equalsIgnoreCase("Login Success")) {
 
@@ -177,8 +184,6 @@ public class ServerDatabaseHandler extends AsyncTask<String,Void,String>  {
                     }
                 });
         alertDialog.show();
-
-
     }
 }
 

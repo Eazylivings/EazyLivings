@@ -75,4 +75,13 @@
         android:layout_marginBottom="20dp"
         android:layout_centerHorizontal="true" />
 
+    <ProgressBar
+        style="?android:attr/progressBarStyleLarge"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/loginPage_progressBar_progress"
+        android:layout_marginBottom="62dp"
+        android:layout_alignBottom="@+id/loginPage_editText_userName"
+        android:layout_centerHorizontal="true" />
+
 </RelativeLayout>
