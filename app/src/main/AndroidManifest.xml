@@ -29,7 +29,8 @@
         <activity
             android:name=".activities.WelcomeScreen"
             android:uiOptions="splitActionBarWhenNarrow" />
-        <activity android:name=".activities.AboutUs"></activity>
+        <activity android:name=".activities.AboutUs" />
+        <activity android:name=".activities.services.FlatSetup"></activity>
     </application>
 
 </manifest>

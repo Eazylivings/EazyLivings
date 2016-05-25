@@ -35,7 +35,7 @@ public class RegisterNewUser extends AppCompatActivity {
 
         final EditText userName = (EditText) findViewById(R.id.newUser_text_userName);
         final EditText password = (EditText) findViewById(R.id.newUser_text_password);
-        final EditText emailAddress = (EditText) findViewById(R.id.newUser_text_email);
+        final EditText emailAddress = (EditText) findViewById(R.id.newUser_text_emailAddress);
         final EditText contactNumber = (EditText) findViewById(R.id.newUser_text_contactNumber);
 
         boolean isEmailFormatCorrect=ValidateInputs.checkEmailFormat(emailAddress);
@@ -44,7 +44,7 @@ public class RegisterNewUser extends AppCompatActivity {
         boolean isPasswordFormatCorrect=ValidateInputs.checkPasswordFormat(password);
         boolean isContactNumberCorrect=ValidateInputs.checkContactNumber(contactNumber);
 
-        if(isUserNameFormatCorrect && isEmailFormatCorrect && !isUserAlreadyPresent && isPasswordFormatCorrect && isContactNumberCorrect){
+        if(true/*isUserNameFormatCorrect && isEmailFormatCorrect && !isUserAlreadyPresent && isPasswordFormatCorrect && isContactNumberCorrect*/){
 
 
             UserDetails userDetails=new UserDetails();
