@@ -44,7 +44,7 @@ public class RegisterNewUser extends AppCompatActivity {
         boolean isPasswordFormatCorrect=ValidateInputs.checkPasswordFormat(password);
         boolean isContactNumberCorrect=ValidateInputs.checkContactNumber(contactNumber);
 
-        if(true/*isUserNameFormatCorrect && isEmailFormatCorrect && !isUserAlreadyPresent && isPasswordFormatCorrect && isContactNumberCorrect*/){
+        if(isUserNameFormatCorrect && isEmailFormatCorrect && !isUserAlreadyPresent && isPasswordFormatCorrect && isContactNumberCorrect){
 
 
             UserDetails userDetails=new UserDetails();
@@ -60,11 +60,11 @@ public class RegisterNewUser extends AppCompatActivity {
             generatePopupMessages("This user is already present. Please sign in.");
         }else if(!isUserNameFormatCorrect){
             generatePopupMessages("Please check username");
-        }else if(isEmailFormatCorrect){
+        }else if(!isEmailFormatCorrect){
             generatePopupMessages("Please provide correct email address");
-        }else if(isPasswordFormatCorrect){
+        }else if(!isPasswordFormatCorrect){
             generatePopupMessages("Please choose correct password");
-        }else if(isContactNumberCorrect){
+        }else if(!isContactNumberCorrect){
             generatePopupMessages("Please provide correct contact number.");
         }
     }

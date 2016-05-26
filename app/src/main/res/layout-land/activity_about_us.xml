@@ -7,6 +7,65 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="eazylivings.com.eazylivings.activities.AboutUs">
+    tools:context="eazylivings.com.eazylivings.activities.AboutUs"
+    android:background="@drawable/background">
 
+    <ImageView
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:id="@+id/aboutUs_imageView_shwetang"
+        android:src="@drawable/profilepic"
+        android:layout_marginStart="34dp"
+        android:layout_above="@+id/aboutUs_textView_shwetang"
+        android:layout_alignParentStart="true" />
+
+    <ImageView
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:id="@+id/aboutUs_imageView_vivek"
+        android:src="@drawable/profilepic"
+        android:layout_above="@+id/aboutUs_textView_vivek"
+        android:layout_alignStart="@+id/aboutUs_textView_vivek" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Shwetang Agarwal"
+        android:id="@+id/aboutUs_textView_shwetang"
+        android:textColor="#0a0a0a"
+        android:layout_centerVertical="true"
+        android:layout_alignParentStart="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Vibek Sharma"
+        android:id="@+id/aboutUs_textView_vivek"
+        android:layout_alignBottom="@+id/aboutUs_imageView_shwetang"
+        android:layout_alignParentEnd="true" />
+
+    <TextView
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Working as a Software Engineer at Oracle India Privat Limited"
+        android:id="@+id/aboutUs_textView_shwetangIntro"
+        android:layout_marginTop="24dp"
+        android:layout_below="@+id/aboutUs_textView_shwetang"
+        android:layout_alignStart="@+id/aboutUs_imageView_shwetang"
+        android:textAlignment="center"
+        android:textColor="#FFFFFF" />
+
+    <TextView
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Working as a Software Engineer at TCS"
+        android:id="@+id/aboutUs_textView_vibekIntro"
+        android:textAlignment="center"
+        android:textColor="#FFFFFF"
+        android:layout_below="@+id/aboutUs_textView_vivek"
+        android:layout_alignStart="@+id/aboutUs_imageView_vivek" />
 </RelativeLayout>

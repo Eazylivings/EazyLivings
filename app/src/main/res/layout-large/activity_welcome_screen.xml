@@ -7,16 +7,7 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="eazylivings.com.eazylivings.activities.WelcomeScreen">
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Large Text"
-        android:id="@+id/welcomeScreen_text_welcome"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="84dp" />
+    tools:context="eazylivings.com.eazylivings.activities.WelcomeScreen"
+    android:background="@drawable/lightbackground">
 
 </RelativeLayout>

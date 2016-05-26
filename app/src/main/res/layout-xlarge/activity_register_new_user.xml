@@ -8,85 +8,73 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context=".activities.login.RegisterNewUser"
-    android:background="@drawable/login">
+    android:background="@drawable/background">
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_alignParentTop="true"
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="40dp"
+        android:inputType="textPersonName"
+        android:ems="10"
+        android:id="@+id/newUser_text_userName"
+        android:layout_above="@+id/newUser_text_emailAddress"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="159dp"
-        >
+        android:autoText="true"
+        android:background="@drawable/rounded_edittext"
+        android:layout_margin="10dp"
+        android:hint="User Name" />
 
-
-        <EditText
-            android:layout_width="wrap_content"
-            android:layout_height="40dp"
-            android:inputType="textPersonName"
-            android:ems="10"
-            android:id="@+id/newUser_text_userName"
-            android:layout_alignParentTop="true"
-            android:layout_centerHorizontal="true"
-            android:hint="@string/username"
-            android:ellipsize="start"
-            android:gravity="center"
-            android:layout_marginTop="10dp"
-            android:background="@drawable/rounded_edittext"
-            android:textColor="#000000"/>
-
-
-        <EditText
+    <EditText
         android:layout_width="wrap_content"
         android:layout_height="40dp"
         android:inputType="textEmailAddress"
         android:ems="10"
-        android:id="@+id/newUser_text_email"
-        android:layout_below="@+id/newUser_text_userName"
+        android:id="@+id/newUser_text_emailAddress"
+        android:layout_centerVertical="true"
         android:layout_centerHorizontal="true"
-        android:hint="@string/email_address"
-        android:gravity="center"
-        android:layout_marginTop="10dp"
         android:background="@drawable/rounded_edittext"
-        android:textColor="#000000"/>
+        android:layout_margin="10dp"
+        android:hint="Email Address" />
 
-        <EditText
-            android:layout_width="wrap_content"
-            android:layout_height="40dp"
-            android:inputType="textPassword"
-            android:ems="10"
-            android:id="@+id/newUser_text_contactNo"
-            android:layout_below="@+id/newUser_text_email"
-            android:layout_centerHorizontal="true"
-            android:hint="@string/contact_number"
-            android:layout_marginTop="10dp"
-            android:gravity="center"
-            android:background="@drawable/rounded_edittext"
-            android:textColor="#000000"/>
-        <EditText
-            android:layout_width="wrap_content"
-            android:layout_height="40dp"
-            android:inputType="textPassword"
-            android:ems="10"
-            android:id="@+id/newUser_text_password"
-            android:layout_below="@+id/newUser_text_phoneNo"
-            android:layout_centerHorizontal="true"
-            android:hint="@string/password"
-            android:layout_marginTop="10dp"
-            android:gravity="center"
-            android:background="@drawable/rounded_edittext"
-            android:textColor="#000000"/>
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="40dp"
+        android:inputType="phone"
+        android:ems="10"
+        android:id="@+id/newUser_text_contactNumber"
+        android:layout_below="@+id/newUser_text_emailAddress"
+        android:layout_centerHorizontal="true"
+        android:background="@drawable/rounded_edittext"
+        android:layout_margin="10dp"
+        android:hint="Contact Number" />
 
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="40dp"
+        android:inputType="textPassword"
+        android:ems="10"
+        android:id="@+id/newUser_text_password"
+        android:layout_below="@+id/newUser_text_contactNumber"
+        android:layout_centerHorizontal="true"
+        android:background="@drawable/rounded_edittext"
+        android:layout_margin="10dp"
+        android:hint="Password" />
 
-        <ImageButton
-            android:layout_width="175dp"
-            android:layout_height="65dp"
-            android:text="@string/register"
-            android:id="@+id/newUser_button_register"
-            android:layout_alignParentBottom="true"
-            android:layout_centerHorizontal="true"
-            android:layout_marginBottom="20dp"
-            android:onClick="registerNewUser"
-            android:layout_marginTop="10dp"
-            android:src="@drawable/regisimage"/>
-    </RelativeLayout>
+    <Button
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:text="Register"
+        android:id="@+id/newUser_button_register"
+        android:onClick="onClickRegisterNewUser"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentStart="true" />
+
+    <Button
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:text="Back to Login"
+        android:id="@+id/newUser_button_backToLogin"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true" />
+
 </RelativeLayout>

@@ -18,7 +18,7 @@ public class ValidateInputs {
     public static boolean checkPasswordFormat(EditText password){
 
         if(password!=null){
-            return password.getText().toString().matches("^(?=.*[A-Za-z])(?=.*\\d)(?=.*[$@$!%*#?&])[A-Za-z\\d$@$!%*#?&]{8,}$");
+            return password.getText().toString().matches("^[a-zA-Z0-9@$_]{3,15}$");
         }else{
             return false;
         }
@@ -26,10 +26,9 @@ public class ValidateInputs {
 
     public static boolean checkEmailFormat(EditText emailAddress){
 
-        if(emailAddress!=null) {
-
-            return android.util.Patterns.EMAIL_ADDRESS.matcher(emailAddress.getText().toString()).matches();
-        }else {
+        if(emailAddress!=null){
+            return emailAddress.getText().toString().matches("^[a-zA-Z0-9@$_]+[@][a-zA-Z]{2,8}[.][a-zA-Z]{2,3}$");
+        }else{
             return false;
         }
     }
@@ -62,7 +61,7 @@ public class ValidateInputs {
     public static boolean checkContactNumber(EditText contactNumber){
 
         if(contactNumber!=null){
-            if(contactNumber.getText().toString().matches("\\+?\\d[\\d -]{8,12}\\d")){
+            if(contactNumber.getText().toString().matches("^[789][0-9]{10}+$")){
                 return true;
             }else{
                 return false;
