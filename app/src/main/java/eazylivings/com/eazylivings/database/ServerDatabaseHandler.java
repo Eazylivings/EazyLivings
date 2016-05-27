@@ -145,7 +145,7 @@ public class ServerDatabaseHandler extends AsyncTask<String,Void,String>  {
         }else if(result.equalsIgnoreCase("Registration Success")){
             DBCreation dbCreation;
             dbCreation=new DBCreation(context,Constants.DATABASE_NAME,null,Constants.DATABASE_VERSION);
-            dbCreation.insertServicesIntoTable();
+            //dbCreation.insertServicesIntoTable();
             dbCreation.createUserSpecificTables(userName);
             dbCreation.insertUserDetails(userDetails);
 

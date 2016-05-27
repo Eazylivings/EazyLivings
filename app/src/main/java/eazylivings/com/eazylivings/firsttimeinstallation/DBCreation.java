@@ -16,8 +16,6 @@ public class DBCreation  extends SQLiteOpenHelper {
 
     private String SERVICE_NAME="service_name";
     private String IS_SUBSCRIBED="is_subscribed";
-    private String IS_USER_LOGGED_IN="is_user_logged_in";
-    private String USER_ID="user_Id";
     ContentValues values;
     SQLiteDatabase db;
 
@@ -55,19 +53,29 @@ public class DBCreation  extends SQLiteOpenHelper {
 
             db.insert(Constants.USER_PREFERENCES_TABLE,null,values);
 
-        }
-        db.close();
-    }
+        }    }
 
     public void createUserSpecificTables(String userName){
 
         if(userName!=null){
             userName=userName.split("@")[0];
         }
+        boolean isTableAlreadyExist=checkIfUserSpecificTableExists(userName);
+        if(isTableAlreadyExist){
 
-        db.execSQL("CREATE TABLE user_details_"+userName+"(_id  INTEGER PRIMARY KEY AUTOINCREMENT,"+
-                " first_name TEXT, last_name TEXT, email_address TEXT, contact_number TEXT, residential_address TEXT )");
-        db.execSQL("CREATE TABLE user_preferences_"+userName+"(_id INTEGER PRIMARY KEY AUTOINCREMENT,service_name TEXT, is_subscribed BOOLEAN)");
+            db.execSQL("DROP TABLE user_details_"+userName);
+            db.execSQL("DROP TABLE user_preferences_"+userName);
+
+            db.execSQL("CREATE TABLE user_details_"+userName+"(_id  INTEGER PRIMARY KEY AUTOINCREMENT,"+
+                    " first_name TEXT, last_name TEXT, email_address TEXT, contact_number TEXT, residential_address TEXT )");
+            db.execSQL("CREATE TABLE user_preferences_"+userName+"(_id INTEGER PRIMARY KEY AUTOINCREMENT,service_name TEXT, is_subscribed BOOLEAN)");
+
+        }else{
+            db.execSQL("CREATE TABLE user_details_"+userName+"(_id  INTEGER PRIMARY KEY AUTOINCREMENT,"+
+                    " user_name TEXT,password TEXT, email_address TEXT, contact_number TEXT, residential_address TEXT )");
+            db.execSQL("CREATE TABLE user_preferences_"+userName+"(_id INTEGER PRIMARY KEY AUTOINCREMENT,service_name TEXT, is_subscribed BOOLEAN)");
+        }
+
     }
 
     public boolean checkIfUserSpecificTableExists(String userName){
@@ -103,10 +111,12 @@ public class DBCreation  extends SQLiteOpenHelper {
             values.put(Constants.COLUMN_PASSWORD,userDetails.getPassword());
             values.put(Constants.COLUMN_EMAIL_ADDRESS,userDetails.getEmail_address());
             values.put(Constants.COLUMN_CONTACT_NUMBER,userDetails.getContact_number());
+            values.put(Constants.COLUMN_ADDRESS,"");
+
             if(db!=null) {
                 db = getWritableDatabase();
                 db.insert("user_details_" + userDetails.getUserName(), null, values);
-                db.close();
+
             }
         }
     }

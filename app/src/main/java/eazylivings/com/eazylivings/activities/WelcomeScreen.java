@@ -74,10 +74,16 @@ public class WelcomeScreen extends AppCompatActivity {
                 generatePopupMessage("Successfully Logged Out..");
                 intent = new Intent(this, LoginPage.class);
                 startActivity(intent);
-                sharedPreference.setBooleanValueInSharedPreference(getApplicationContext(),"loginStatus", false);
-                sharedPreference.setStringValueInSharedPreference(getApplicationContext(),"username","Newbie.");
+                sharedPreference.removeValueFromSharedPreference(getApplicationContext(),"loginStatus");
+                sharedPreference.removeValueFromSharedPreference(getApplicationContext(),"userName");
                 break;
             case R.id.logIn:
+                intent = new Intent(this, LoginPage.class);
+                startActivity(intent);
+                sharedPreference.removeValueFromSharedPreference(getApplicationContext(),"loginStatus");
+                sharedPreference.removeValueFromSharedPreference(getApplicationContext(),"userName");
+                break;
+            case R.id.preferences:
                 intent = new Intent(this, LoginPage.class);
                 startActivity(intent);
                 sharedPreference.setBooleanValueInSharedPreference(getApplicationContext(),"loginStatus", false);

@@ -33,14 +33,16 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Large Text"
         android:id="@+id/userProfile_text_userName"
         android:layout_alignBottom="@+id/userProfile_userName"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
         android:layout_marginRight="47dp"
         android:layout_marginEnd="47dp"
-        android:editable="false" />
+        android:editable="false"
+        android:hint="New User"
+        android:ellipsize="end"
+        android:singleLine="true"/>
 
     <TextView
         android:layout_width="wrap_content"
@@ -56,12 +58,14 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Large Text"
         android:id="@+id/userProfile_text_contactNumber"
         android:layout_alignBottom="@+id/userProfile_contactNumber"
         android:layout_alignLeft="@+id/userProfile_text_userName"
         android:layout_alignStart="@+id/userProfile_text_userName"
-        android:editable="false" />
+        android:editable="false"
+        android:hint="Contact Number"
+        android:ellipsize="end"
+        android:singleLine="true"/>
 
     <TextView
         android:layout_width="wrap_content"
@@ -86,11 +90,13 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Large Text"
         android:id="@+id/userProfile_text_address"
         android:layout_alignBottom="@+id/userProfile_address"
         android:layout_alignLeft="@+id/userProfile_text_contactNumber"
-        android:layout_alignStart="@+id/userProfile_text_contactNumber" />
+        android:layout_alignStart="@+id/userProfile_text_contactNumber"
+        android:hint="Address"
+        android:ellipsize="end"
+        android:singleLine="true"/>
 
     <Button
         android:layout_width="160dp"
@@ -123,9 +129,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Large Text"
         android:id="@+id/textView"
         android:layout_alignTop="@+id/userprofile_emailAddress"
-        android:layout_alignStart="@+id/userProfile_text_userName" />
+        android:layout_alignStart="@+id/userProfile_text_userName"
+        android:hint="Email Address"
+        android:ellipsize="end"
+        android:singleLine="true"/>
 
 </RelativeLayout>

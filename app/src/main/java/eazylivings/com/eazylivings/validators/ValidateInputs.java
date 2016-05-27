@@ -61,7 +61,7 @@ public class ValidateInputs {
     public static boolean checkContactNumber(EditText contactNumber){
 
         if(contactNumber!=null){
-            if(contactNumber.getText().toString().matches("^[789][0-9]{10}+$")){
+            if(contactNumber.getText().toString().matches("^[789][0-9]{9}+$")){
                 return true;
             }else{
                 return false;
