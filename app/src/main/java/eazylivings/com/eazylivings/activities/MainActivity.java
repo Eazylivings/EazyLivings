@@ -6,7 +6,7 @@ import android.content.SharedPreferences;
 import android.os.Handler;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
-
+import eazylivings.com.eazylivings.activities.services.WelcomeScreen;
 import eazylivings.com.eazylivings.R;
 
 public class MainActivity extends Activity {
