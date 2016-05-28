@@ -13,7 +13,7 @@ import android.widget.EditText;
 import android.widget.ProgressBar;
 
 import eazylivings.com.eazylivings.R;
-import eazylivings.com.eazylivings.activities.WelcomeScreen;
+import eazylivings.com.eazylivings.activities.services.WelcomeScreen;
 import eazylivings.com.eazylivings.constants.Constants;
 import eazylivings.com.eazylivings.database.ServerDatabaseHandler;
 import eazylivings.com.eazylivings.firsttimeinstallation.DBCreation;
