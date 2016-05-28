@@ -19,5 +19,11 @@
     <string name="your_preferences">Your Preferences</string>
     <string name="go_back">Go Back</string>
     <string name="preferences">Preferences</string>
+    <string name="title_activity_welcome_screen">WelcomeScreen</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string name="action_settings">Settings</string>
 
 </resources>
