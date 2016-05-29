@@ -31,6 +31,13 @@ public class LoginPage extends AppCompatActivity {
         progressBar.setVisibility(View.INVISIBLE);
     }
 
+    @Override
+    public void onBackPressed(){
+        finish();
+        Intent intent = new Intent(getApplicationContext(),WelcomeScreen.class);
+        startActivity(intent);
+    }
+
     public void onClickLoginButton(View view) {
         EditText editText_userName = (EditText) findViewById(R.id.loginPage_editText_userName);
         EditText editText_password = (EditText) findViewById(R.id.loginPage_editText_password);

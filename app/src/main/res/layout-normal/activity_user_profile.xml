@@ -23,16 +23,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="@string/user_name"
-        android:id="@+id/userProfile_userName"
-        android:layout_marginTop="32dp"
-        android:layout_below="@+id/userProfile_imageView_userImage"
-        android:layout_alignParentStart="true" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
         android:id="@+id/userProfile_text_userName"
         android:layout_alignBottom="@+id/userProfile_userName"
         android:layout_alignParentRight="true"
@@ -48,11 +38,12 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="@string/contact_number"
-        android:id="@+id/userProfile_contactNumber"
-        android:layout_below="@+id/userprofile_emailAddress"
-        android:layout_alignParentStart="true"
-        android:layout_marginTop="21dp" />
+        android:id="@+id/userProfile_text_emailAddress"
+        android:layout_alignTop="@+id/userprofile_emailAddress"
+        android:layout_alignStart="@+id/userProfile_text_userName"
+        android:hint="Email Address"
+        android:ellipsize="end"
+        android:singleLine="true"/>
 
     <TextView
         android:layout_width="wrap_content"
@@ -71,10 +62,22 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="@string/address"
-        android:id="@+id/userProfile_address"
-        android:layout_marginTop="18dp"
-        android:layout_below="@+id/userProfile_contactNumber"
+        android:id="@+id/userProfile_text_address"
+        android:layout_alignBottom="@+id/userProfile_address"
+        android:layout_alignLeft="@+id/userProfile_text_contactNumber"
+        android:layout_alignStart="@+id/userProfile_text_contactNumber"
+        android:hint="Address"
+        android:ellipsize="end"
+        android:singleLine="true"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="@string/user_name"
+        android:id="@+id/userProfile_userName"
+        android:layout_marginTop="32dp"
+        android:layout_below="@+id/userProfile_imageView_userImage"
         android:layout_alignParentStart="true" />
 
     <TextView
@@ -90,13 +93,30 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:id="@+id/userProfile_text_address"
-        android:layout_alignBottom="@+id/userProfile_address"
-        android:layout_alignLeft="@+id/userProfile_text_contactNumber"
-        android:layout_alignStart="@+id/userProfile_text_contactNumber"
-        android:hint="Address"
-        android:ellipsize="end"
-        android:singleLine="true"/>
+        android:text="@string/contact_number"
+        android:id="@+id/userProfile_contactNumber"
+        android:layout_below="@+id/userprofile_emailAddress"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="21dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="@string/address"
+        android:id="@+id/userProfile_address"
+        android:layout_marginTop="18dp"
+        android:layout_below="@+id/userProfile_contactNumber"
+        android:layout_alignParentStart="true" />
+
+    <Button
+        android:layout_width="160dp"
+        android:layout_height="wrap_content"
+        android:text="@string/your_preferences"
+        android:id="@+id/userProfile_button_seePreferences"
+        android:layout_alignBaseline="@+id/userProfile_button_updateProfile"
+        android:layout_alignBottom="@+id/userProfile_button_updateProfile"
+        android:layout_alignParentStart="true" />
 
     <Button
         android:layout_width="160dp"
@@ -115,25 +135,5 @@
         android:id="@+id/userProfile_button_back"
         android:layout_below="@+id/userProfile_button_updateProfile"
         android:layout_centerHorizontal="true" />
-
-    <Button
-        android:layout_width="160dp"
-        android:layout_height="wrap_content"
-        android:text="@string/your_preferences"
-        android:id="@+id/userProfile_button_seePreferences"
-        android:layout_alignBaseline="@+id/userProfile_button_updateProfile"
-        android:layout_alignBottom="@+id/userProfile_button_updateProfile"
-        android:layout_alignParentStart="true" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:id="@+id/textView"
-        android:layout_alignTop="@+id/userprofile_emailAddress"
-        android:layout_alignStart="@+id/userProfile_text_userName"
-        android:hint="Email Address"
-        android:ellipsize="end"
-        android:singleLine="true"/>
 
 </RelativeLayout>

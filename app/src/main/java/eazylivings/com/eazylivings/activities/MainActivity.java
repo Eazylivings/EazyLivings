@@ -18,14 +18,17 @@ public class MainActivity extends Activity {
 
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
        if(!prefs.getBoolean("loginStatus", false)){
-           prefs.edit().putString("userName","Newbie.");
+           prefs.edit().remove("userName");
        }
 
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
                 final Intent mainIntent;
-                mainIntent = new Intent(MainActivity.this, WelcomeScreen.class);
+                mainIntent = new Intent(MainActivity.this,WelcomeScreen.class);
+                mainIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                mainIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                mainIntent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
 
                 MainActivity.this.startActivity(mainIntent);
                 MainActivity.this.finish();

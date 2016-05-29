@@ -8,6 +8,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
+import eazylivings.com.eazylivings.VO.UserDetails;
 import eazylivings.com.eazylivings.constants.Constants;
 
 public class LocalDatabaseHandler extends SQLiteOpenHelper{
@@ -39,24 +40,33 @@ public class LocalDatabaseHandler extends SQLiteOpenHelper{
 
     //Select details from Table
 
-    public void fetchDetailsFromTable(){
+    public UserDetails fetchDetailsFromTable(String username) {
 
-        SQLiteDatabase db=getWritableDatabase();
-        String query="SELECT * FROM "+ Constants.SIGNUP_DETAILS_TABLE + " WHERE 1";
+        UserDetails userDetails = new UserDetails();
+        SQLiteDatabase db = getWritableDatabase();
+        String query = "SELECT * FROM " + Constants.SIGNUP_DETAILS_TABLE + username;
 
         //Cursor points to a location in results
 
-        Cursor cursor=db.rawQuery(query,null);
-        cursor.moveToFirst();
+        Cursor cursor = db.rawQuery(query, null);
+        if (cursor != null){
+            cursor.moveToFirst();
+            String columnArray[] = cursor.getColumnNames();
 
-        while(!cursor.isAfterLast()){
-            if(cursor.getString(cursor.getColumnIndex("userName"))!=null){
+            while (!cursor.isAfterLast()) {
 
-                String result=cursor.getString(cursor.getColumnIndex("userName"));
-                Log.i("12",result);
+                userDetails.setUserName(cursor.getString(cursor.getColumnIndex(columnArray[0])));
+                userDetails.setEmail_address(cursor.getString(cursor.getColumnIndex(columnArray[1])));
+                userDetails.setContact_number(cursor.getString(cursor.getColumnIndex(columnArray[2])));
+                userDetails.setResidential_address(cursor.getString(cursor.getColumnIndex(columnArray[3])));
+
             }
-            db.close();
+            if(db!=null){
+                db.close();
+            }
         }
+
+        return userDetails;
     }
 
 }
